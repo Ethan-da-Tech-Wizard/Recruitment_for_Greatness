@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our Team | Santé of Mesa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/public.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <span>SANTÉ</span>
+                </div>
+                <div class="header-text">
+                    <h1>Santé of Mesa</h1>
+                    <p class="tagline">A Leading Senior & Post-Acute Healthcare Facility</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="{{ url_for('index') }}" class="nav-link active">Join Our Team</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Build Your Career With Us</h2>
+            <p>Join a team that makes a difference every day. We're looking for compassionate, dedicated individuals to help us provide exceptional care.</p>
+        </div>
+    </section>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Team Showcase -->
+        <section class="team-showcase">
+            <h2>Our Departments</h2>
+            <p class="section-subtitle">Explore career opportunities across our facility</p>
+            
+            <div class="department-grid">
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="nursing">
+                        <span>Nursing Team</span>
+                    </div>
+                    <h3>Nursing</h3>
+                    <p>RNs, LPNs providing exceptional patient care</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="cna">
+                        <span>CNA Team</span>
+                    </div>
+                    <h3>Certified Nursing Assistants</h3>
+                    <p>The heart of our daily care operations</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="culinary">
+                        <span>Culinary Team</span>
+                    </div>
+                    <h3>Culinary & Dietary</h3>
+                    <p>Nutrition experts crafting healthy meals</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="housekeeping">
+                        <span>EVS Team</span>
+                    </div>
+                    <h3>Housekeeping/EVS</h3>
+                    <p>Maintaining our clean, safe environment</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="therapy">
+                        <span>Therapy Team</span>
+                    </div>
+                    <h3>Therapy Services</h3>
+                    <p>PT, OT, and Speech Therapy professionals</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="activities">
+                        <span>Activities Team</span>
+                    </div>
+                    <h3>Activities</h3>
+                    <p>Enriching residents' daily lives</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="social">
+                        <span>Social Services</span>
+                    </div>
+                    <h3>Social Services</h3>
+                    <p>Supporting residents and families</p>
+                </div>
+                
+                <div class="department-card">
+                    <div class="dept-image-placeholder" data-dept="admin">
+                        <span>Admin Team</span>
+                    </div>
+                    <h3>Administrative</h3>
+                    <p>Keeping operations running smoothly</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interest Form -->
+        <section class="form-section" id="form">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Interested? Let's Connect!</h2>
+                    <p>Fill out this quick form and we'll reach out to tell you more about opportunities at Santé of Mesa.</p>
+                </div>
+                
+                <form action="{{ url_for('submit_form') }}" method="POST" class="interest-form">
+                    <!-- Personal Information -->
+                    <div class="form-section-title">
+                        <span class="section-number">1</span>
+                        <span>Your Information</span>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first_name">First Name <span class="required">*</span></label>
+                            <input type="text" id="first_name" name="first_name" required placeholder="Enter your first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name <span class="required">*</span></label>
+                            <input type="text" id="last_name" name="last_name" required placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Preferences -->
+                    <div class="form-section-title">
+                        <span class="section-number">2</span>
+                        <span>Best Time to Reach You</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="best_time_to_call">When should we call?</label>
+                        <select id="best_time_to_call" name="best_time_to_call">
+                            <option value="">Select a time...</option>
+                            <option value="morning">Morning (8am - 12pm)</option>
+                            <option value="afternoon">Afternoon (12pm - 5pm)</option>
+                            <option value="evening">Evening (5pm - 8pm)</option>
+                            <option value="anytime">Anytime</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Department Interest -->
+                    <div class="form-section-title">
+                        <span class="section-number">3</span>
+                        <span>Areas of Interest</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Which departments interest you? (Select all that apply)</label>
+                        <div class="checkbox-grid">
+                            {% for dept in departments %}
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="departments" value="{{ dept }}">
+                                <span class="checkbox-text">{{ dept }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Experience -->
+                    <div class="form-section-title">
+                        <span class="section-number">4</span>
+                        <span>Your Background</span>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience_level">Experience Level</label>
+                            <select id="experience_level" name="experience_level">
+                                <option value="">Select your experience...</option>
+                                <option value="entry">Entry Level / New to Healthcare</option>
+                                <option value="some">Some Experience (1-2 years)</option>
+                                <option value="experienced">Experienced (3-5 years)</option>
+                                <option value="senior">Senior Level (5+ years)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="availability">Availability</label>
+                            <select id="availability" name="availability">
+                                <option value="">When can you start?</option>
+                                <option value="immediately">Immediately</option>
+                                <option value="two_weeks">Within 2 Weeks</option>
+                                <option value="one_month">Within 1 Month</option>
+                                <option value="flexible">Flexible / Negotiable</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="how_heard_about_us">How did you hear about us?</label>
+                        <select id="how_heard_about_us" name="how_heard_about_us">
+                            <option value="">Select an option...</option>
+                            <option value="job_fair">Job Fair</option>
+                            <option value="referral">Employee Referral</option>
+                            <option value="online">Online Search</option>
+                            <option value="social_media">Social Media</option>
+                            <option value="school">School/College</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additional_info">Anything else you'd like us to know?</label>
+                        <textarea id="additional_info" name="additional_info" rows="3" placeholder="Tell us about yourself, your goals, or any questions you have..."></textarea>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class="form-submit">
+                        <button type="submit" class="submit-btn">
+                            <span>Request a Call Back</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </button>
+                        <p class="form-note">We respect your privacy. Your information will only be used to contact you about career opportunities.</p>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Why Join Us -->
+        <section class="why-join">
+            <h2>Why Join Santé of Mesa?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3>Meaningful Work</h3>
+                    <p>Make a real difference in the lives of our residents every day.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3>Team Culture</h3>
+                    <p>Join a supportive team that feels like family.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Growth Opportunities</h3>
+                    <p>Advance your career with training and development programs.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3>Competitive Benefits</h3>
+                    <p>Enjoy comprehensive benefits and competitive compensation.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Santé of Mesa</h3>
+                <p>Part of the Alumnus Healthcare Family</p>
+            </div>
+            <div class="footer-contact">
+                <p>Mesa, Arizona</p>
+                <p>A Skilled Nursing & Rehabilitation Facility</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Santé of Mesa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/public.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ candidate.first_name }} {{ candidate.last_name }} | Santé Recruitment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder admin-logo">
+                    <span>SANTÉ</span>
+                </div>
+                <div class="header-text">
+                    <h1>Recruitment Dashboard</h1>
+                    <p class="tagline">Santé of Mesa - Admin Portal</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Candidate Details -->
+    <main class="candidate-main">
+        <div class="candidate-container">
+            <!-- Candidate Header -->
+            <div class="candidate-header">
+                <div class="candidate-info">
+                    <h1>{{ candidate.first_name }} {{ candidate.last_name }}</h1>
+                    <span class="status-badge status-{{ candidate.status }}">
+                        {% for status_key, status_name in status_options %}
+                            {% if status_key == candidate.status %}{{ status_name }}{% endif %}
+                        {% endfor %}
+                        {% if candidate.status == 'new' %}New - Uncontacted{% endif %}
+                    </span>
+                </div>
+                <div class="candidate-actions">
+                    <form action="{{ url_for('delete_candidate_route', candidate_id=candidate.id) }}" method="POST" 
+                          onsubmit="return confirm('Are you sure you want to delete this candidate?');">
+                        <button type="submit" class="btn btn-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="candidate-grid">
+                <!-- Contact Information -->
+                <section class="detail-section contact-section">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        Contact Information
+                    </h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Phone</span>
+                            <span class="detail-value clickable">
+                                <a href="tel:{{ candidate.phone }}">{{ candidate.phone }}</a>
+                            </span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Email</span>
+                            <span class="detail-value">
+                                {% if candidate.email %}
+                                <a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a>
+                                {% else %}
+                                Not provided
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Best Time to Call</span>
+                            <span class="detail-value highlight">{{ candidate.best_time_to_call or 'Not specified' }}</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Status Update -->
+                <section class="detail-section status-section">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                        Update Status
+                    </h2>
+                    <form action="{{ url_for('update_status', candidate_id=candidate.id) }}" method="POST" class="status-form">
+                        <select name="status" class="status-select">
+                            {% for status_key, status_name in status_options %}
+                            <option value="{{ status_key }}" {% if status_key == candidate.status %}selected{% endif %}>
+                                {{ status_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Update Status</button>
+                    </form>
+                </section>
+
+                <!-- Interest Details -->
+                <section class="detail-section interest-section">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                        Interest Details
+                    </h2>
+                    <div class="detail-grid">
+                        <div class="detail-item full-width">
+                            <span class="detail-label">Departments Interested In</span>
+                            <span class="detail-value">
+                                {% if candidate.departments_interested %}
+                                <div class="department-tags">
+                                    {% for dept in candidate.departments_interested.split(', ') %}
+                                    <span class="department-tag">{{ dept }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                None selected
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Experience Level</span>
+                            <span class="detail-value">{{ candidate.experience_level or 'Not specified' }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Availability</span>
+                            <span class="detail-value">{{ candidate.availability or 'Not specified' }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">How They Heard About Us</span>
+                            <span class="detail-value">{{ candidate.how_heard_about_us or 'Not specified' }}</span>
+                        </div>
+                    </div>
+                    
+                    {% if candidate.additional_info %}
+                    <div class="additional-info">
+                        <span class="detail-label">Additional Information</span>
+                        <p class="detail-value">{{ candidate.additional_info }}</p>
+                    </div>
+                    {% endif %}
+                </section>
+
+                <!-- Notes Section -->
+                <section class="detail-section notes-section">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        Recruiter Notes
+                    </h2>
+                    <form action="{{ url_for('update_notes', candidate_id=candidate.id) }}" method="POST" class="notes-form">
+                        <textarea name="notes" rows="6" placeholder="Add notes about your conversation, follow-up items, or any relevant information...">{{ candidate.notes or '' }}</textarea>
+                        <button type="submit" class="btn btn-primary">Save Notes</button>
+                    </form>
+                </section>
+
+                <!-- Metadata -->
+                <section class="detail-section meta-section">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Record Information
+                    </h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Submitted</span>
+                            <span class="detail-value">{{ candidate.created_at or 'Unknown' }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Last Updated</span>
+                            <span class="detail-value">{{ candidate.updated_at or 'Unknown' }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Record ID</span>
+                            <span class="detail-value">#{{ candidate.id }}</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Santé Recruitment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder admin-logo">
+                    <span>SANTÉ</span>
+                </div>
+                <div class="header-text">
+                    <h1>Recruitment Dashboard</h1>
+                    <p class="tagline">Santé of Mesa - Admin Portal</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="{{ url_for('export_data') }}" class="btn btn-export">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Export CSV
+                </a>
+                <button onclick="location.reload()" class="btn btn-refresh">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Dashboard -->
+    <main class="admin-main">
+        <!-- Sidebar with Filters -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Filter by Status</h3>
+                <nav class="status-nav">
+                    <a href="{{ url_for('dashboard', status='all') }}" 
+                       class="status-link {% if current_status == 'all' %}active{% endif %}">
+                        <span class="status-label">All Candidates</span>
+                        <span class="status-count">{{ status_counts.get('all', 0) }}</span>
+                    </a>
+                    {% for status_key, status_name in status_options %}
+                    <a href="{{ url_for('dashboard', status=status_key) }}" 
+                       class="status-link status-{{ status_key }} {% if current_status == status_key %}active{% endif %}">
+                        <span class="status-label">{{ status_name }}</span>
+                        <span class="status-count">{{ status_counts.get(status_key, 0) }}</span>
+                    </a>
+                    {% endfor %}
+                </nav>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Search</h3>
+                <form action="{{ url_for('dashboard') }}" method="GET" class="search-form">
+                    <input type="hidden" name="status" value="{{ current_status }}">
+                    <input type="text" name="search" placeholder="Name, email, phone..." 
+                           value="{{ search_query }}" class="search-input">
+                    <button type="submit" class="search-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </form>
+                {% if search_query %}
+                <a href="{{ url_for('dashboard', status=current_status) }}" class="clear-search">Clear Search</a>
+                {% endif %}
+            </div>
+
+            <div class="sidebar-section stats-section">
+                <h3>Quick Stats</h3>
+                <div class="quick-stats">
+                    <div class="stat">
+                        <span class="stat-value">{{ status_counts.get('new', 0) }}</span>
+                        <span class="stat-label">Need to Call</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">{{ status_counts.get('interested', 0) }}</span>
+                        <span class="stat-label">Interested</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Candidates List -->
+        <section class="candidates-section">
+            <div class="section-header">
+                <h2>
+                    {% if current_status == 'all' %}
+                        All Candidates
+                    {% else %}
+                        {% for status_key, status_name in status_options %}
+                            {% if status_key == current_status %}{{ status_name }}{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <span class="count">({{ candidates|length }})</span>
+                </h2>
+            </div>
+
+            {% if candidates %}
+            <div class="candidates-table-container">
+                <table class="candidates-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Best Time</th>
+                            <th>Departments</th>
+                            <th>Status</th>
+                            <th>Submitted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidate in candidates %}
+                        <tr class="candidate-row" data-id="{{ candidate.id }}">
+                            <td class="name-cell">
+                                <a href="{{ url_for('view_candidate', candidate_id=candidate.id) }}">
+                                    {{ candidate.first_name }} {{ candidate.last_name }}
+                                </a>
+                                {% if candidate.notes %}
+                                <span class="has-notes" title="Has notes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    </svg>
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td class="contact-cell">
+                                <div class="phone">{{ candidate.phone }}</div>
+                                {% if candidate.email %}
+                                <div class="email">{{ candidate.email }}</div>
+                                {% endif %}
+                            </td>
+                            <td>{{ candidate.best_time_to_call or 'Not specified' }}</td>
+                            <td class="departments-cell">
+                                <div class="departments-list">
+                                    {{ candidate.departments_interested or 'None selected' }}
+                                </div>
+                            </td>
+                            <td>
+                                <span class="status-badge status-{{ candidate.status }}">
+                                    {% for status_key, status_name in status_options %}
+                                        {% if status_key == candidate.status %}{{ status_name }}{% endif %}
+                                    {% endfor %}
+                                    {% if candidate.status == 'new' %}New - Uncontacted{% endif %}
+                                </span>
+                            </td>
+                            <td class="date-cell">{{ candidate.created_at[:10] if candidate.created_at else 'Unknown' }}</td>
+                            <td class="actions-cell">
+                                <a href="{{ url_for('view_candidate', candidate_id=candidate.id) }}" class="action-btn view-btn" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="no-results">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="8" y1="15" x2="16" y2="15"></line>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <h3>No candidates found</h3>
+                <p>
+                    {% if search_query %}
+                        No results match "{{ search_query }}". Try a different search.
+                    {% else %}
+                        No candidates in this category yet.
+                    {% endif %}
+                </p>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! | Santé of Mesa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/public.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <span>SANTÉ</span>
+                </div>
+                <div class="header-text">
+                    <h1>Santé of Mesa</h1>
+                    <p class="tagline">A Leading Senior & Post-Acute Healthcare Facility</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Join Our Team</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Success Content -->
+    <main class="success-page">
+        <div class="success-container">
+            <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            
+            <h1>Thank You!</h1>
+            <p class="success-message">Your information has been submitted successfully.</p>
+            
+            <div class="success-details">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3>What's Next?</h3>
+                    <p>One of our team members will call you at your preferred time to discuss exciting career opportunities at Santé of Mesa.</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Save Our Number</h3>
+                    <p>Look out for a call from our recruitment team. We're excited to speak with you!</p>
+                </div>
+            </div>
+            
+            <div class="success-actions">
+                <a href="{{ url_for('about') }}" class="btn btn-secondary">Learn More About Us</a>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Submit Another Form</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Santé of Mesa</h3>
+                <p>Part of the Alumnus Healthcare Family</p>
+            </div>
+            <div class="footer-contact">
+                <p>Mesa, Arizona</p>
+                <p>A Skilled Nursing & Rehabilitation Facility</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Santé of Mesa. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

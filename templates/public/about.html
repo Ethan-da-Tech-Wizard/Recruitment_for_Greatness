@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Santé of Mesa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/public.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <span>SANTÉ</span>
+                </div>
+                <div class="header-text">
+                    <h1>Santé of Mesa</h1>
+                    <p class="tagline">A Leading Senior & Post-Acute Healthcare Facility</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Join Our Team</a>
+                <a href="{{ url_for('about') }}" class="nav-link active">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>About Santé</h1>
+            <p>A Legacy of Compassionate Care</p>
+        </div>
+    </section>
+
+    <!-- Main About Content -->
+    <main class="about-content">
+        <!-- Company Story -->
+        <section class="about-section story-section">
+            <div class="section-container">
+                <div class="story-content">
+                    <h2>Our Story</h2>
+                    <div class="story-text">
+                        <p><strong>"Santé"</strong> — a French word meaning "health" and often used as a toast to good health — embodies our core mission. When our founders established the Santé brand, they envisioned healthcare facilities that would go beyond traditional skilled nursing to create true communities of healing, dignity, and hope.</p>
+                        
+                        <p>As part of the <strong>Alumnus Healthcare</strong> family, Santé facilities operate with a commitment to excellence that spans clinical care, resident experience, and employee satisfaction. Alumnus Healthcare recognized that exceptional care begins with exceptional people, which is why creating a supportive, growth-oriented workplace has always been central to the Santé philosophy.</p>
+                        
+                        <p>The name "Santé" was chosen deliberately — it represents our belief that true healthcare encompasses physical, emotional, and social well-being. Every resident who walks through our doors deserves to feel valued, respected, and cared for as an individual with unique needs and preferences.</p>
+                    </div>
+                    
+                    <div class="story-image-placeholder">
+                        <span>Company History Image</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Santé of Mesa Building -->
+        <section class="about-section building-section">
+            <div class="section-container">
+                <h2>Santé of Mesa</h2>
+                <p class="section-subtitle">Your Future Workplace in the Heart of Arizona</p>
+                
+                <div class="building-overview">
+                    <div class="building-image-placeholder">
+                        <span>Santé of Mesa Building Exterior</span>
+                    </div>
+                    
+                    <div class="building-details">
+                        <h3>Facility Overview</h3>
+                        <p>Santé of Mesa stands as a premier skilled nursing and rehabilitation facility in Mesa, Arizona. Our state-of-the-art building combines modern medical capabilities with a warm, home-like atmosphere that makes both residents and staff feel welcomed.</p>
+                        
+                        <div class="facility-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">120+</span>
+                                <span class="stat-label">Licensed Beds</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">150+</span>
+                                <span class="stat-label">Team Members</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Care Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Amenities -->
+                <div class="amenities-section">
+                    <h3>Our Amenities & Services</h3>
+                    <div class="amenities-grid">
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                                </svg>
+                            </div>
+                            <h4>Therapy Gymnasium</h4>
+                            <p>State-of-the-art rehabilitation gym with modern equipment for physical, occupational, and speech therapy</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path>
+                                    <path d="M7 2v20"></path>
+                                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path>
+                                </svg>
+                            </div>
+                            <h4>Restaurant-Style Dining</h4>
+                            <p>Beautiful dining room with chef-prepared meals and diverse menu options</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                            </div>
+                            <h4>Private & Semi-Private Rooms</h4>
+                            <p>Comfortable living spaces designed for dignity and privacy</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                                </svg>
+                            </div>
+                            <h4>Modern Technology</h4>
+                            <p>WiFi throughout, electronic health records, and modern communication systems</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                                </svg>
+                            </div>
+                            <h4>Activities Center</h4>
+                            <p>Dedicated space for recreational activities, social events, and community programs</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>Secure Environment</h4>
+                            <p>24/7 security with specialized memory care units for resident safety</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                </svg>
+                            </div>
+                            <h4>Clinical Excellence</h4>
+                            <p>Wound care, IV therapy, cardiac care, and specialized medical programs</p>
+                        </div>
+                        
+                        <div class="amenity-card">
+                            <div class="amenity-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                            </div>
+                            <h4>Outdoor Spaces</h4>
+                            <p>Landscaped courtyards and outdoor areas for relaxation and activities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="about-section leadership-section">
+            <div class="section-container">
+                <h2>Our Leadership Team</h2>
+                <p class="section-subtitle">Meet the People Who Keep Santé of Mesa Running</p>
+                
+                <div class="leadership-grid">
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>Administrator Photo</span>
+                        </div>
+                        <h3>Administrator</h3>
+                        <p class="leader-title">Executive Director</p>
+                        <p class="leader-desc">Oversees all facility operations, ensuring the highest standards of care and compliance while fostering a positive workplace culture.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>DON Photo</span>
+                        </div>
+                        <h3>Director of Nursing</h3>
+                        <p class="leader-title">Clinical Leadership</p>
+                        <p class="leader-desc">Leads our nursing department, maintaining clinical excellence and supporting our nursing staff's professional development.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>ADON Photo</span>
+                        </div>
+                        <h3>Assistant Director of Nursing</h3>
+                        <p class="leader-title">Nursing Operations</p>
+                        <p class="leader-desc">Supports nursing operations, staff scheduling, and ensures consistent quality care across all shifts.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>HR Director Photo</span>
+                        </div>
+                        <h3>Human Resources Director</h3>
+                        <p class="leader-title">People & Culture</p>
+                        <p class="leader-desc">Champions employee engagement, recruitment, benefits, and creates a supportive work environment for all team members.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>Therapy Director Photo</span>
+                        </div>
+                        <h3>Director of Rehabilitation</h3>
+                        <p class="leader-title">Therapy Services</p>
+                        <p class="leader-desc">Leads our PT, OT, and Speech Therapy programs, ensuring residents receive comprehensive rehabilitation services.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>Dietary Director Photo</span>
+                        </div>
+                        <h3>Dietary Director</h3>
+                        <p class="leader-title">Culinary Services</p>
+                        <p class="leader-desc">Manages our culinary team, creating nutritious and delicious meals that meet residents' dietary needs and preferences.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>Social Services Photo</span>
+                        </div>
+                        <h3>Director of Social Services</h3>
+                        <p class="leader-title">Resident Advocacy</p>
+                        <p class="leader-desc">Coordinates social services, discharge planning, and ensures residents and families receive comprehensive support.</p>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-photo-placeholder">
+                            <span>Activities Director Photo</span>
+                        </div>
+                        <h3>Activities Director</h3>
+                        <p class="leader-title">Life Enrichment</p>
+                        <p class="leader-desc">Creates engaging programs and activities that enhance residents' quality of life and promote social connection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="about-section services-section">
+            <div class="section-container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Skilled Nursing Care</h3>
+                        <p>24-hour nursing care for residents requiring ongoing medical attention and support with daily activities.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Short-Term Rehabilitation</h3>
+                        <p>Post-hospital recovery programs with intensive physical, occupational, and speech therapy.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Long-Term Care</h3>
+                        <p>Compassionate care for residents who need ongoing assistance and medical supervision.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Memory Care</h3>
+                        <p>Specialized programs for residents with Alzheimer's disease and other forms of dementia.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Respite Care</h3>
+                        <p>Short-term stays providing relief for family caregivers while ensuring quality care.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Wound Care</h3>
+                        <p>Advanced wound care programs with certified wound care specialists.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section class="about-section values-section">
+            <div class="section-container">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">C</div>
+                        <h3>Compassion</h3>
+                        <p>We treat every resident and team member with genuine care and empathy.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">A</div>
+                        <h3>Accountability</h3>
+                        <p>We take responsibility for our actions and continuously strive for excellence.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">R</div>
+                        <h3>Respect</h3>
+                        <p>We honor the dignity and individuality of every person in our community.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">E</div>
+                        <h3>Excellence</h3>
+                        <p>We pursue the highest standards in everything we do, every day.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="about-cta">
+            <div class="cta-content">
+                <h2>Ready to Make a Difference?</h2>
+                <p>Join our team and become part of the Santé of Mesa family.</p>
+                <a href="{{ url_for('index') }}#form" class="cta-button">Fill Out Interest Form</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Santé of Mesa</h3>
+                <p>Part of the Alumnus Healthcare Family</p>
+            </div>
+            <div class="footer-contact">
+                <p>Mesa, Arizona</p>
+                <p>A Skilled Nursing & Rehabilitation Facility</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Santé of Mesa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/public.js') }}"></script>
+</body>
+</html>
