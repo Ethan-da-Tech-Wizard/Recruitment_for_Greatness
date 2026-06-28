@@ -83,6 +83,11 @@ def init_database():
         cursor.execute('''
             CREATE INDEX IF NOT EXISTS idx_name ON candidates(last_name, first_name)
         ''')
+
+        cursor.execute('PRAGMA table_info(candidates)')
+        existing_columns = {row['name'] for row in cursor.fetchall()}
+        if 'commute_preference' not in existing_columns:
+            cursor.execute('ALTER TABLE candidates ADD COLUMN commute_preference TEXT')
         
         conn.commit()
         print(f"Database initialized at: {DB_PATH}")
@@ -111,8 +116,8 @@ def add_candidate(data):
                 first_name, last_name, email, phone,
                 best_time_to_call, departments_interested,
                 experience_level, availability,
-                how_heard_about_us, additional_info
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                commute_preference, how_heard_about_us, additional_info
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             data.get('first_name', ''),
             data.get('last_name', ''),
@@ -122,6 +127,7 @@ def add_candidate(data):
             departments,
             data.get('experience_level', ''),
             data.get('availability', ''),
+            data.get('commute_preference', ''),
             data.get('how_heard_about_us', ''),
             data.get('additional_info', '')
         ))

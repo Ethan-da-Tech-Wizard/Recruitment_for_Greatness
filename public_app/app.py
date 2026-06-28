@@ -43,6 +43,7 @@ def submit_form():
             'departments_interested': request.form.getlist('departments'),
             'experience_level': request.form.get('experience_level', ''),
             'availability': request.form.get('availability', ''),
+            'commute_preference': request.form.get('commute_preference', ''),
             'how_heard_about_us': request.form.get('how_heard_about_us', ''),
             'additional_info': request.form.get('additional_info', '')
         }

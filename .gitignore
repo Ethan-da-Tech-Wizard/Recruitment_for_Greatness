@@ -8,8 +8,8 @@ env/
 venv/
 .venv/
 
-# Database (keep for development, ignore in production)
-# *.db
+# Local databases
+*.db
 
 # IDE
 .idea/

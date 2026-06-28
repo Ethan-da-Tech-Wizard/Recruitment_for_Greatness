@@ -27,11 +27,15 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2>Build Your Career With Us</h2>
-            <p>Join a team that makes a difference every day. We're looking for compassionate, dedicated individuals to help us provide exceptional care.</p>
+            <span class="hero-kicker">Better at Shea</span>
+            <h2>Where good care becomes a calling.</h2>
+            <p>Shea PARC is looking for people who bring warmth, steadiness, and heart to post-acute care. Tell us where you want to grow, and a real person from our team will reach out.</p>
+            <div class="hero-actions">
+                <a href="#form" class="btn btn-primary hero-primary">Start the Conversation</a>
+                <a href="{{ url_for('about') }}" class="btn btn-secondary hero-secondary">Meet Shea PARC</a>
+            </div>
         </div>
     </section>
 
@@ -48,10 +52,47 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Team Showcase -->
+        <section class="warm-intro">
+            <div class="intro-copy">
+                <span class="section-kicker">A better day starts with people</span>
+                <h2>Better at Shea means better together.</h2>
+                <p>At Shea Post Acute Rehabilitation Center, residents come to recover strength, mobility, confidence, and hope. The work is clinical, but the feeling is deeply human: one good conversation, one safe transfer, one clean room, one meal, one therapy win, one calm hand at a time.</p>
+                <p>We are building a team that notices the little things and takes pride in making the hard days softer.</p>
+            </div>
+            <div class="intro-notes" aria-label="Better at Shea commitments">
+                <div>
+                    <strong>Bring your heart.</strong>
+                    <span>We can teach systems. We cannot fake kindness.</span>
+                </div>
+                <div>
+                    <strong>Grow your skill.</strong>
+                    <span>In-house therapy, nursing, and support teams learn shoulder to shoulder.</span>
+                </div>
+                <div>
+                    <strong>Find your fit.</strong>
+                    <span>If Shea is too far, we can introduce you to nearby sister facilities.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="identity-band">
+            <div class="identity-item">
+                <span class="identity-label">Shea PARC</span>
+                <p>Scottsdale's short-term rehabilitation and skilled nursing community, with 24-hour nursing care and in-house therapy.</p>
+            </div>
+            <div class="identity-item">
+                <span class="identity-label">Ensign</span>
+                <p>A broader family of affiliated post-acute care operations with local leaders, shared support, and room to grow.</p>
+            </div>
+            <div class="identity-item">
+                <span class="identity-label">Sister Facilities</span>
+                <p>If the commute is not right, we would still love to help you meet a sister facility closer to home.</p>
+            </div>
+        </section>
+
         <section class="team-showcase">
             <h2>Our Departments</h2>
-            <p class="section-subtitle">Explore career opportunities across our facility</p>
+            <p class="section-subtitle">Every department has a way to make life feel better here.</p>
             
             <div class="department-grid">
                 <div class="department-card">
@@ -59,7 +100,7 @@
                         <span>Nursing Team</span>
                     </div>
                     <h3>Nursing</h3>
-                    <p>RNs, LPNs providing exceptional patient care</p>
+                    <p>RNs and LPNs bringing steady clinical care and calm confidence.</p>
                 </div>
                 
                 <div class="department-card">
@@ -67,7 +108,7 @@
                         <span>CNA Team</span>
                     </div>
                     <h3>Certified Nursing Assistants</h3>
-                    <p>The heart of our daily care operations</p>
+                    <p>The hands-on heart of comfort, dignity, and daily progress.</p>
                 </div>
                 
                 <div class="department-card">
@@ -75,7 +116,7 @@
                         <span>Culinary Team</span>
                     </div>
                     <h3>Culinary & Dietary</h3>
-                    <p>Nutrition experts crafting healthy meals</p>
+                    <p>Meals, hydration, and hospitality that make the building feel cared for.</p>
                 </div>
                 
                 <div class="department-card">
@@ -83,7 +124,7 @@
                         <span>EVS Team</span>
                     </div>
                     <h3>Housekeeping/EVS</h3>
-                    <p>Maintaining our clean, safe environment</p>
+                    <p>The quiet excellence that keeps residents safe, clean, and comfortable.</p>
                 </div>
                 
                 <div class="department-card">
@@ -91,7 +132,7 @@
                         <span>Therapy Team</span>
                     </div>
                     <h3>Therapy Services</h3>
-                    <p>PT, OT, and Speech Therapy professionals</p>
+                    <p>PT, OT, and speech therapy professionals helping residents get stronger.</p>
                 </div>
                 
                 <div class="department-card">
@@ -99,7 +140,7 @@
                         <span>Activities Team</span>
                     </div>
                     <h3>Activities</h3>
-                    <p>Enriching residents' daily lives</p>
+                    <p>Connection, routine, laughter, music, movement, and meaningful days.</p>
                 </div>
                 
                 <div class="department-card">
@@ -107,7 +148,7 @@
                         <span>Social Services</span>
                     </div>
                     <h3>Social Services</h3>
-                    <p>Supporting residents and families</p>
+                    <p>Guiding residents and families through transitions with care.</p>
                 </div>
                 
                 <div class="department-card">
@@ -115,7 +156,7 @@
                         <span>Admin Team</span>
                     </div>
                     <h3>Administrative</h3>
-                    <p>Keeping operations running smoothly</p>
+                    <p>Keeping communication, records, hiring, and daily operations moving.</p>
                 </div>
             </div>
         </section>
@@ -125,7 +166,7 @@
             <div class="form-container">
                 <div class="form-header">
                     <h2>Interested? Let's Connect!</h2>
-                    <p>Fill out this quick form and we'll reach out to tell you more about opportunities at Shea Post Acute Rehabilitation Center.</p>
+                    <p>Tell us about you. Whether Shea is perfect or you need a sister facility closer to home, we will help you find the right conversation.</p>
                 </div>
                 
                 <form action="{{ url_for('submit_form') }}" method="POST" class="interest-form">
@@ -220,6 +261,17 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="commute_preference">Is Shea a good travel distance for you?</label>
+                        <select id="commute_preference" name="commute_preference">
+                            <option value="">Select an option...</option>
+                            <option value="Shea is a good commute">Yes, Shea is a good commute for me</option>
+                            <option value="Open to sister facilities closer to home">I like this kind of work, but I may need a sister facility closer to home</option>
+                            <option value="Unsure about commute">I'm not sure yet</option>
+                        </select>
+                        <p class="field-note">If Shea is not close enough, our team can still introduce you to nearby sister facilities in the Ensign-affiliated network.</p>
+                    </div>
                     
                     <div class="form-group">
                         <label for="how_heard_about_us">How did you hear about us?</label>
@@ -255,7 +307,8 @@
 
         <!-- Why Join Us -->
         <section class="why-join">
-            <h2>Why Join Shea Post Acute Rehabilitation Center?</h2>
+            <span class="section-kicker">Why Join Shea?</span>
+            <h2>Because better care changes everyone in the room.</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">
@@ -264,7 +317,7 @@
                         </svg>
                     </div>
                     <h3>Meaningful Work</h3>
-                    <p>Make a real difference in the lives of our residents every day.</p>
+                    <p>Help residents rebuild routines, confidence, and independence after hard chapters.</p>
                 </div>
                 
                 <div class="benefit-card">
@@ -277,7 +330,7 @@
                         </svg>
                     </div>
                     <h3>Team Culture</h3>
-                    <p>Join a supportive team that feels like family.</p>
+                    <p>Work beside people who know that good care depends on trust and follow-through.</p>
                 </div>
                 
                 <div class="benefit-card">
@@ -288,7 +341,7 @@
                         </svg>
                     </div>
                     <h3>Growth Opportunities</h3>
-                    <p>Advance your career with training and development programs.</p>
+                    <p>Learn from local leaders, therapy partners, nurses, and sister-facility teams.</p>
                 </div>
                 
                 <div class="benefit-card">
@@ -299,9 +352,17 @@
                         </svg>
                     </div>
                     <h3>Competitive Benefits</h3>
-                    <p>Enjoy comprehensive benefits and competitive compensation.</p>
+                    <p>Talk with our recruiting team about current roles, schedules, and benefits.</p>
                 </div>
             </div>
+        </section>
+
+        <section class="sister-facility-note">
+            <div>
+                <span class="section-kicker">Not close to Shea?</span>
+                <h2>Still raise your hand.</h2>
+            </div>
+            <p>Shea is the home base for this page, but the spirit of the work reaches beyond one building. If your commute would not make sense, tell us. We would be happy to introduce you to a sister facility where your heart for care can land closer to home.</p>
         </section>
     </main>
 

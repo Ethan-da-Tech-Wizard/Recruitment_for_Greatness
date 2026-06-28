@@ -80,6 +80,8 @@ pip install -r requirements.txt
 python shared/init_db.py
 ```
 
+The SQLite database is created locally at `shared/shea_parc_data.db` and is ignored by Git. Each laptop keeps its own candidate data offline.
+
 ### 3. Run the Applications
 
 **Terminal 1 - Public Form App:**
@@ -155,6 +157,9 @@ CREATE TABLE candidates (
     departments_interested TEXT,
     experience_level TEXT,
     availability TEXT,
+    commute_preference TEXT,
+    how_heard_about_us TEXT,
+    additional_info TEXT,
     status TEXT DEFAULT 'new',
     notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -191,7 +196,7 @@ Recruitment_for_Greatness/
 │   ├── __init__.py
 │   ├── database.py        # Database operations
 │   ├── init_db.py         # Database initialization
-│   └── shea_parc_data.db      # SQLite database (created on init)
+│   └── shea_parc_data.db  # Local SQLite database (created on init, ignored by Git)
 ├── public_app/
 │   ├── __init__.py
 │   └── app.py             # Public Flask app

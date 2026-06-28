@@ -61,26 +61,152 @@
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    min-height: 560px;
+    background:
+        linear-gradient(90deg, rgba(0, 63, 79, 0.92) 0%, rgba(0, 95, 115, 0.74) 42%, rgba(0, 95, 115, 0.16) 100%),
+        url('../images/generated/better-at-shea-hero.jpg') center right / cover no-repeat;
     color: var(--white);
-    padding: var(--spacing-2xl) var(--spacing-lg);
-    text-align: center;
+    padding: 5rem var(--spacing-lg);
+    display: flex;
+    align-items: center;
 }
 
 .hero-content {
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .hero h2 {
-    font-size: var(--font-size-4xl);
+    max-width: 620px;
+    font-size: clamp(2.5rem, 6vw, 5rem);
     color: var(--white);
     margin-bottom: var(--spacing-md);
+    line-height: 1.05;
 }
 
 .hero p {
+    max-width: 590px;
     font-size: var(--font-size-lg);
     color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-xl);
+}
+
+.hero-kicker,
+.section-kicker {
+    display: inline-block;
+    color: var(--gold);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.hero-primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--maroon-dark);
+}
+
+.hero-primary:hover {
+    background: #f4b63e;
+    border-color: #f4b63e;
+    color: var(--maroon-dark);
+}
+
+.hero-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.75);
+    color: var(--white);
+}
+
+.hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+    color: var(--white);
+}
+
+.warm-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: var(--spacing-xl);
+    align-items: stretch;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.intro-copy {
+    padding: var(--spacing-xl) 0;
+}
+
+.intro-copy h2,
+.sister-facility-note h2 {
+    color: var(--maroon);
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.intro-copy p {
+    color: var(--gray-700);
+    font-size: var(--font-size-lg);
+}
+
+.intro-notes {
+    display: grid;
+    gap: var(--spacing-md);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-xl);
+}
+
+.intro-notes div {
+    border-left: 4px solid var(--gold);
+    padding-left: var(--spacing-md);
+}
+
+.intro-notes strong {
+    color: var(--maroon);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+.intro-notes span {
+    color: var(--gray-600);
+    display: block;
+}
+
+.identity-band {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.identity-item {
+    background: linear-gradient(180deg, var(--white), var(--gold-light));
+    border: 1px solid rgba(0, 95, 115, 0.16);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    min-height: 190px;
+}
+
+.identity-label {
+    color: var(--maroon);
+    display: block;
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+}
+
+.identity-item p {
+    color: var(--gray-700);
     margin: 0;
 }
 
@@ -228,6 +354,13 @@
     margin-bottom: var(--spacing-xs);
 }
 
+.field-note {
+    color: var(--gray-500);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    margin-top: var(--spacing-xs);
+}
+
 .required {
     color: var(--error);
 }
@@ -313,7 +446,10 @@
 }
 
 .why-join h2 {
+    max-width: 780px;
     color: var(--maroon);
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: var(--spacing-xl);
 }
 
@@ -329,6 +465,29 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     text-align: center;
+}
+
+.sister-facility-note {
+    align-items: center;
+    background: var(--maroon-dark);
+    border-radius: var(--radius-lg);
+    color: var(--white);
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: 0.85fr 1.15fr;
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+}
+
+.sister-facility-note h2 {
+    color: var(--white);
+    margin-bottom: 0;
+}
+
+.sister-facility-note p {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: var(--font-size-lg);
+    margin: 0;
 }
 
 .benefit-icon {
@@ -449,7 +608,9 @@
 
 /* About Page */
 .about-hero {
-    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    background:
+        linear-gradient(90deg, rgba(0, 63, 79, 0.92), rgba(0, 95, 115, 0.62)),
+        url('../images/generated/better-at-shea-hero.jpg') center / cover no-repeat;
     color: var(--white);
     padding: var(--spacing-2xl) var(--spacing-lg);
     text-align: center;
@@ -512,13 +673,25 @@
 
 .story-image-placeholder {
     height: 300px;
-    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+    background:
+        linear-gradient(180deg, rgba(0, 95, 115, 0.08), rgba(238, 155, 0, 0.18)),
+        url('../images/generated/better-at-shea-hero.jpg') center / cover no-repeat;
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-500);
-    border: 2px dashed var(--gray-300);
+    color: var(--white);
+    border: 0;
+    min-height: 320px;
+    overflow: hidden;
+    position: relative;
+}
+
+.story-image-placeholder span {
+    background: rgba(0, 63, 79, 0.82);
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    padding: var(--spacing-sm) var(--spacing-md);
 }
 
 /* Building Section */
@@ -529,15 +702,55 @@
     margin-bottom: var(--spacing-xl);
 }
 
-.building-image-placeholder {
-    height: 300px;
-    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+.location-panel {
+    align-self: stretch;
+    background:
+        linear-gradient(135deg, rgba(237, 246, 244, 0.96), rgba(255, 255, 255, 0.96)),
+        radial-gradient(circle at 15% 20%, rgba(238, 155, 0, 0.28), transparent 28%);
     border-radius: var(--radius-lg);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    box-shadow: var(--shadow-md);
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    color: var(--gray-500);
-    border: 2px dashed var(--gray-300);
+    min-height: 300px;
+    padding: var(--spacing-xl);
+}
+
+.location-panel h3 {
+    color: var(--maroon);
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.location-panel p {
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-xs);
+    overflow-wrap: anywhere;
+}
+
+.ensign-grid {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.ensign-panel {
+    background: var(--white);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+}
+
+.ensign-panel h3 {
+    color: var(--maroon);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ensign-panel p {
+    color: var(--gray-600);
+    margin: 0;
 }
 
 .building-details h3 {
@@ -768,6 +981,24 @@
         flex-direction: column;
     }
     
+    .hero {
+        min-height: auto;
+        padding: 4rem var(--spacing-lg);
+    }
+
+    .hero-actions,
+    .success-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .warm-intro,
+    .identity-band,
+    .sister-facility-note,
+    .ensign-grid,
     .story-content,
     .building-overview {
         grid-template-columns: 1fr;
