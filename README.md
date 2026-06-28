@@ -1,4 +1,4 @@
-# Santé of Mesa Recruitment Pipeline
+# Shea PARC Recruitment Pipeline
 
 ## Overview
 A professional, inviting recruitment application designed for job fairs and in-person recruiting events. This two-app system allows potential candidates to fill out interest forms while recruiters manage and track follow-ups through a separate admin interface.
@@ -9,7 +9,7 @@ A professional, inviting recruitment application designed for job fairs and in-p
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        SANTÉ RECRUITMENT PIPELINE                           │
+│                        SHEA PARC RECRUITMENT PIPELINE                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌──────────────────────┐         ┌──────────────────────┐                 │
@@ -47,7 +47,7 @@ A professional, inviting recruitment application designed for job fairs and in-p
 | Backend | Python 3.x + Flask | Lightweight, easy to deploy, low resource usage |
 | Database | SQLite | Local storage, no server needed, portable |
 | Frontend | HTML5 + CSS3 + Vanilla JS | No build tools, works offline, fast loading |
-| Styling | Custom CSS (Maroon, Gold, White) | Brand colors, professional appearance |
+| Styling | Custom CSS (Deep Teal, Amber, White) | Brand colors, professional appearance |
 
 ### Why This Stack?
 - **Low Resource Requirements**: Runs on 4-8GB RAM, no GPU needed
@@ -109,8 +109,8 @@ python run_both.py
 - Professional interest form with contact details
 - Best time to call selector
 - Department interest selection
-- About Santé section with company history
-- Santé of Mesa building showcase
+- About Shea PARC section with facility overview
+- Shea Post Acute Rehabilitation Center building showcase
 - Team photo galleries by department
 - Mobile-responsive design
 
@@ -135,10 +135,10 @@ python run_both.py
 
 | Color | Hex Code | Usage |
 |-------|----------|-------|
-| Maroon | #800000 | Primary headers, buttons |
-| Gold | #FFD700 | Accents, highlights, hover states |
+| Deep Teal | #005F73 | Primary headers, buttons |
+| Amber | #EE9B00 | Accents, highlights, hover states |
 | White | #FFFFFF | Background, text on dark |
-| Light Gold | #FFF8DC | Secondary backgrounds |
+| Soft Teal | #EDF6F4 | Secondary backgrounds |
 
 ---
 
@@ -191,7 +191,7 @@ Recruitment_for_Greatness/
 │   ├── __init__.py
 │   ├── database.py        # Database operations
 │   ├── init_db.py         # Database initialization
-│   └── sante_data.db      # SQLite database (created on init)
+│   └── shea_parc_data.db      # SQLite database (created on init)
 ├── public_app/
 │   ├── __init__.py
 │   └── app.py             # Public Flask app
@@ -213,7 +213,7 @@ Recruitment_for_Greatness/
 └── templates/
     ├── public/
     │   ├── index.html     # Main form page
-    │   ├── about.html     # About Santé page
+    │   ├── about.html     # About Shea PARC page
     │   └── success.html   # Form submission success
     └── admin/
         ├── dashboard.html # Main dashboard
@@ -222,15 +222,15 @@ Recruitment_for_Greatness/
 
 ---
 
-## About Santé of Mesa
+## About Shea Post Acute Rehabilitation Center
 
-*See the About section in the application for full company history and building information.*
+*See the About section in the application for facility information and recruiting context.*
 
 ---
 
 ## License
 
-Internal use only - Santé of Mesa / Alumnus Healthcare
+Internal use only - Shea Post Acute Rehabilitation Center / Ensign Services
 
 ---
 

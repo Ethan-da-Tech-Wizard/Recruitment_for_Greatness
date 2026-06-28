@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Initialize the Santé Recruitment database.
+Initialize the Shea PARC Recruitment database.
 Run this script before first use.
 """
 
@@ -14,7 +14,7 @@ from shared.database import init_database, DB_PATH
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("Santé of Mesa Recruitment Pipeline")
+    print("Shea PARC Recruitment Pipeline")
     print("Database Initialization")
     print("=" * 50)
     

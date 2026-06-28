@@ -1,5 +1,5 @@
 """
-Database operations for Santé Recruitment Pipeline.
+Database operations for Shea PARC Recruitment Pipeline.
 Uses SQLite for local, offline-capable storage.
 """
 
@@ -9,7 +9,7 @@ from datetime import datetime
 from contextlib import contextmanager
 
 # Database file path (in shared folder)
-DB_PATH = os.path.join(os.path.dirname(__file__), 'sante_data.db')
+DB_PATH = os.path.join(os.path.dirname(__file__), 'shea_parc_data.db')
 
 # Status options for candidates
 STATUS_OPTIONS = [

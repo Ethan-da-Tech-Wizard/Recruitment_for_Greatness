@@ -14,7 +14,7 @@ from admin_app.app import app
 
 if __name__ == '__main__':
     print("\n" + "=" * 60)
-    print("   SANTÉ OF MESA - ADMIN DASHBOARD")
+    print("   SHEA PARC - ADMIN DASHBOARD")
     print("=" * 60)
     print(f"\n   Access URL:  http://localhost:5001")
     print("\n   This dashboard is for recruiters only.")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Public Form Application for Santé of Mesa Recruitment.
+Public Form Application for Shea Post Acute Rehabilitation Center Recruitment.
 This is the candidate-facing application for job fairs.
 """
 
@@ -17,7 +17,7 @@ from shared.database import add_candidate, init_database, DEPARTMENTS
 app = Flask(__name__,
             template_folder='../templates/public',
             static_folder='../static')
-app.secret_key = 'sante-mesa-recruitment-2024'
+app.secret_key = 'shea-parc-recruitment-2026'
 
 # Ensure database exists
 init_database()
@@ -74,7 +74,7 @@ def success():
 
 @app.route('/about')
 def about():
-    """About Santé page."""
+    """About Shea PARC page."""
     return render_template('about.html')
 
 
@@ -100,7 +100,7 @@ def get_local_ip():
 if __name__ == '__main__':
     local_ip = get_local_ip()
     print("\n" + "=" * 60)
-    print("   SANTÉ OF MESA - PUBLIC RECRUITMENT FORM")
+    print("   SHEA PARC - PUBLIC RECRUITMENT FORM")
     print("=" * 60)
     print(f"\n   Local Access:  http://localhost:5000")
     print(f"   LAN Access:    http://{local_ip}:5000")

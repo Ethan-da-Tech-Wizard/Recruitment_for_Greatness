@@ -1,19 +1,19 @@
 /* 
- * Santé of Mesa Recruitment Pipeline
+ * Shea PARC Recruitment Pipeline
  * Common Styles - Shared across both applications
- * Colors: Maroon (#800000), Gold (#FFD700), White (#FFFFFF)
+ * Colors: Deep teal, amber, white
  */
 
 /* CSS Variables */
 :root {
     /* Primary Colors */
-    --maroon: #800000;
-    --maroon-dark: #5c0000;
-    --maroon-light: #a52a2a;
+    --maroon: #005f73;
+    --maroon-dark: #003f4f;
+    --maroon-light: #0a9396;
     
-    --gold: #FFD700;
-    --gold-dark: #daa520;
-    --gold-light: #fff8dc;
+    --gold: #ee9b00;
+    --gold-dark: #ca6702;
+    --gold-light: #edf6f4;
     
     --white: #ffffff;
     --off-white: #fafafa;

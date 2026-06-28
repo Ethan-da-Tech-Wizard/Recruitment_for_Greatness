@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Admin Dashboard Application for Santé of Mesa Recruitment.
+Admin Dashboard Application for Shea Post Acute Rehabilitation Center Recruitment.
 This is the recruiter-facing application for managing candidates.
 """
 
@@ -22,7 +22,7 @@ from shared.database import (
 app = Flask(__name__,
             template_folder='../templates/admin',
             static_folder='../static')
-app.secret_key = 'sante-mesa-admin-2024'
+app.secret_key = 'shea-parc-admin-2026'
 
 # Ensure database exists
 init_database()
@@ -92,7 +92,7 @@ def export_data():
     return Response(
         csv_data,
         mimetype='text/csv',
-        headers={'Content-Disposition': 'attachment; filename=sante_candidates.csv'}
+        headers={'Content-Disposition': 'attachment; filename=shea_parc_candidates.csv'}
     )
 
 
@@ -154,7 +154,7 @@ def get_local_ip():
 if __name__ == '__main__':
     local_ip = get_local_ip()
     print("\n" + "=" * 60)
-    print("   SANTÉ OF MESA - ADMIN DASHBOARD")
+    print("   SHEA PARC - ADMIN DASHBOARD")
     print("=" * 60)
     print(f"\n   Access URL:  http://localhost:5001")
     print("\n   This dashboard is for recruiters only.")

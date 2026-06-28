@@ -38,7 +38,7 @@ if __name__ == '__main__':
     local_ip = get_local_ip()
     
     print("\n" + "=" * 70)
-    print("   SANTÉ OF MESA RECRUITMENT PIPELINE")
+    print("   SHEA PARC RECRUITMENT PIPELINE")
     print("   Both Applications Starting...")
     print("=" * 70)
     print("\n   PUBLIC FORM (Share with candidates):")
