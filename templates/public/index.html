@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/public.css') }}">
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <aside class="journey-dock" aria-label="Page sections">
+        <a href="#story" class="journey-dot active" data-section-link="story"><span>Story</span></a>
+        <a href="#departments" class="journey-dot" data-section-link="departments"><span>Teams</span></a>
+        <a href="#form" class="journey-dot" data-section-link="form"><span>Connect</span></a>
+    </aside>
+
     <!-- Header -->
     <header class="main-header">
         <div class="header-content">
@@ -37,6 +47,24 @@
                 <a href="{{ url_for('about') }}" class="btn btn-secondary hero-secondary">Meet Shea PARC</a>
             </div>
         </div>
+        <div class="hero-signal" aria-label="Better at Shea care signal">
+            <div class="signal-core">
+                <span class="signal-value">98%</span>
+                <span class="signal-label">Care Signal</span>
+            </div>
+            <div class="signal-line">
+                <span>Skilled Nursing</span>
+                <strong>24/7</strong>
+            </div>
+            <div class="signal-line">
+                <span>Rehabilitation</span>
+                <strong>In-House</strong>
+            </div>
+            <div class="signal-line">
+                <span>Fit Check</span>
+                <strong>Shea + Sisters</strong>
+            </div>
+        </div>
     </section>
 
     <!-- Flash Messages -->
@@ -52,7 +80,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <section class="warm-intro">
+        <section class="warm-intro" id="story">
             <div class="intro-copy">
                 <span class="section-kicker">A better day starts with people</span>
                 <h2>Better at Shea means better together.</h2>
@@ -90,7 +118,31 @@
             </div>
         </section>
 
-        <section class="team-showcase">
+        <section class="role-path-section">
+            <div class="path-heading">
+                <span class="section-kicker">Choose Your Lane</span>
+                <h2>Different roles. One care signal.</h2>
+            </div>
+            <div class="path-grid">
+                <article class="path-card">
+                    <span class="path-number">01</span>
+                    <h3>Steady Hands</h3>
+                    <p>Nursing and CNA roles for people who bring calm, safety, and dignity into the details.</p>
+                </article>
+                <article class="path-card">
+                    <span class="path-number">02</span>
+                    <h3>Recovery Builders</h3>
+                    <p>Therapy and clinical support roles focused on strength, progress, and practical wins.</p>
+                </article>
+                <article class="path-card">
+                    <span class="path-number">03</span>
+                    <h3>House Warmers</h3>
+                    <p>Culinary, EVS, activities, maintenance, and admin roles that shape the whole building feel.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="team-showcase" id="departments">
             <h2>Our Departments</h2>
             <p class="section-subtitle">Every department has a way to make life feel better here.</p>
             
@@ -165,8 +217,16 @@
         <section class="form-section" id="form">
             <div class="form-container">
                 <div class="form-header">
-                    <h2>Interested? Let's Connect!</h2>
-                    <p>Tell us about you. Whether Shea is perfect or you need a sister facility closer to home, we will help you find the right conversation.</p>
+                    <div>
+                        <h2>Interested? Let's Connect!</h2>
+                        <p>Tell us about you. Whether Shea is perfect or you need a sister facility closer to home, we will help you find the right conversation.</p>
+                    </div>
+                    <div class="form-progress" aria-label="Form completion">
+                        <span class="form-progress-label">Signal 0%</span>
+                        <div class="form-progress-track">
+                            <div class="form-progress-bar"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <form action="{{ url_for('submit_form') }}" method="POST" class="interest-form">

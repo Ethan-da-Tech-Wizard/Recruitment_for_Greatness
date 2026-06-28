@@ -4,6 +4,74 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+    function updateScrollProgress() {
+        if (!scrollProgressBar) {
+            return;
+        }
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+        scrollProgressBar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, progress)) + ')';
+    }
+    updateScrollProgress();
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+    const revealTargets = document.querySelectorAll(
+        '.warm-intro, .identity-item, .path-card, .department-card, .form-container, .benefit-card, .sister-facility-note'
+    );
+    revealTargets.forEach(function(target) {
+        target.classList.add('reveal-on-scroll');
+    });
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.16 });
+
+        revealTargets.forEach(function(target) {
+            revealObserver.observe(target);
+        });
+    } else {
+        revealTargets.forEach(function(target) {
+            target.classList.add('visible');
+        });
+    }
+
+    const sectionLinks = document.querySelectorAll('[data-section-link]');
+    const sections = Array.from(sectionLinks).map(function(link) {
+        const id = link.getAttribute('data-section-link');
+        return {
+            id: id,
+            link: link,
+            section: document.getElementById(id)
+        };
+    }).filter(function(item) {
+        return item.section;
+    });
+
+    if ('IntersectionObserver' in window && sections.length) {
+        const sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    sections.forEach(function(item) {
+                        item.link.classList.toggle('active', item.section === entry.target);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -45% 0px', threshold: 0.01 });
+
+        sections.forEach(function(item) {
+            sectionObserver.observe(item.section);
+        });
+    }
+
     // Phone number formatting
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {
@@ -20,7 +88,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form validation enhancement
     const form = document.querySelector('.interest-form');
+    const formProgressLabel = document.querySelector('.form-progress-label');
+    const formProgressBar = document.querySelector('.form-progress-bar');
+
+    function hasValue(id) {
+        const el = document.getElementById(id);
+        return !!(el && el.value.trim());
+    }
+
+    function updateFormProgress() {
+        if (!form || !formProgressLabel || !formProgressBar) {
+            return;
+        }
+
+        const checks = [
+            hasValue('first_name'),
+            hasValue('last_name'),
+            hasValue('phone'),
+            hasValue('best_time_to_call'),
+            document.querySelectorAll('input[name="departments"]:checked').length > 0,
+            hasValue('experience_level'),
+            hasValue('commute_preference')
+        ];
+        const complete = checks.filter(Boolean).length;
+        const percent = Math.round((complete / checks.length) * 100);
+        formProgressLabel.textContent = 'Signal ' + percent + '%';
+        formProgressBar.style.width = percent + '%';
+    }
+
     if (form) {
+        form.addEventListener('input', updateFormProgress);
+        form.addEventListener('change', updateFormProgress);
+        updateFormProgress();
+
         form.addEventListener('submit', function(e) {
             const firstName = document.getElementById('first_name').value.trim();
             const lastName = document.getElementById('last_name').value.trim();
@@ -66,6 +166,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Department card hover effects
     const deptCards = document.querySelectorAll('.department-card');
+    function setDepartmentCardState() {
+        deptCards.forEach(function(card) {
+            const deptName = card.querySelector('h3').textContent;
+            const firstWord = deptName.split(' ')[0];
+            const selected = Array.from(document.querySelectorAll('input[name="departments"]:checked')).some(function(checkbox) {
+                return checkbox.value.includes(firstWord);
+            });
+            card.classList.toggle('selected', selected);
+        });
+    }
+
     deptCards.forEach(function(card) {
         card.addEventListener('click', function() {
             // Scroll to form and check the corresponding checkbox
@@ -75,15 +186,33 @@ document.addEventListener('DOMContentLoaded', function() {
             checkboxes.forEach(function(checkbox) {
                 if (checkbox.value.includes(deptName.split(' ')[0])) {
                     checkbox.checked = true;
-                    checkbox.parentElement.style.backgroundColor = 'var(--gold-light)';
+                    checkbox.parentElement.classList.add('selected');
+                    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
                 }
             });
+
+            setDepartmentCardState();
             
             const formSection = document.getElementById('form');
             if (formSection) {
                 formSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
+
+        if (!reduceMotion) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const rotateY = ((x / rect.width) - 0.5) * 6;
+                const rotateX = ((0.5 - (y / rect.height)) * 6);
+                card.style.transform = 'translateY(-4px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = '';
+            });
+        }
         
         card.style.cursor = 'pointer';
     });
@@ -95,13 +224,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (checkbox) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
-                    label.style.backgroundColor = 'var(--gold-light)';
-                    label.style.borderColor = 'var(--gold)';
+                    label.classList.add('selected');
                 } else {
-                    label.style.backgroundColor = '';
-                    label.style.borderColor = '';
+                    label.classList.remove('selected');
                 }
+                setDepartmentCardState();
+                updateFormProgress();
             });
         }
     });
+
+    setDepartmentCardState();
 });
