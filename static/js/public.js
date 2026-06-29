@@ -158,12 +158,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const mapBoard = document.querySelector('.az-map-board');
     const mapSection = document.querySelector('.az-map-section');
     const mapModeButtons = document.querySelectorAll('[data-map-mode-button]');
+    const mapRegionButtons = document.querySelectorAll('[data-map-region]');
     const mapDetail = document.querySelector('.map-detail');
     const mapDetailLabel = mapDetail ? mapDetail.querySelector('.map-detail-label') : null;
     const mapDetailTitle = mapDetail ? mapDetail.querySelector('h3') : null;
     const mapDetailCopy = mapDetail ? mapDetail.querySelector('p') : null;
     const mapLocationList = mapDetail ? mapDetail.querySelector('.map-location-list') : null;
     const mapDetailNote = mapDetail ? mapDetail.querySelector('strong') : null;
+    const mapDetailRegion = mapDetail ? mapDetail.querySelector('[data-map-detail-region]') : null;
+    const mapDetailDistance = mapDetail ? mapDetail.querySelector('[data-map-detail-distance]') : null;
+    const mapDetailCount = mapDetail ? mapDetail.querySelector('[data-map-detail-count]') : null;
     const mapCityPoints = {
         'Scottsdale': { x: 63, y: 40 },
         'Phoenix': { x: 55, y: 47 },
@@ -193,9 +197,11 @@ document.addEventListener('DOMContentLoaded', function() {
         { x: -6.8, y: -0.2 }
     ];
     let activeLocationPin = null;
+    let activeRegion = 'all';
 
     if (mapSection) {
         mapSection.dataset.mapMode = 'clusters';
+        mapSection.dataset.mapRegion = 'all';
     }
 
     function getCityPin(city) {
@@ -206,6 +212,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatLocationAddress(location, city) {
         return location.address + ', ' + city + ', AZ';
+    }
+
+    function updateMapMetrics(pin, locationCount) {
+        if (!pin) {
+            return;
+        }
+        if (mapDetailRegion) {
+            mapDetailRegion.textContent = pin.dataset.zone || 'Arizona';
+        }
+        if (mapDetailDistance) {
+            mapDetailDistance.textContent = pin.dataset.distance || 'Ask the Shea team';
+        }
+        if (mapDetailCount) {
+            mapDetailCount.textContent = pin.dataset.count || locationCount + ' locations';
+        }
+    }
+
+    function pinMatchesRegion(pin, region) {
+        return region === 'all' || pin.dataset.region === region;
+    }
+
+    function getFirstRegionPin(region) {
+        return Array.from(mapPins).find(function(pin) {
+            return pinMatchesRegion(pin, region);
+        });
     }
 
     function renderLocationList(city, selectedIndex) {
@@ -262,6 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mapDetailLabel.textContent = city + ' - location ' + (index + 1) + ' of ' + locations.length;
         mapDetailTitle.textContent = location.name;
         mapDetailCopy.textContent = formatLocationAddress(location, city);
+        updateMapMetrics(cityPin, locations.length);
         renderLocationList(city, index);
         mapDetailNote.textContent = cityPin.dataset.note || 'Same care energy, different doorway.';
     }
@@ -287,6 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mapDetailLabel.textContent = (pin.dataset.zone || 'Care Network Area') + ' - ' + (pin.dataset.count || locations.length + ' locations');
         mapDetailTitle.textContent = city;
         mapDetailCopy.textContent = pin.dataset.copy || '';
+        updateMapMetrics(pin, locations.length);
         renderLocationList(city, -1);
         mapDetailNote.textContent = pin.dataset.note || '';
     }
@@ -312,6 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pin.className = 'location-pin';
                 pin.dataset.city = city;
                 pin.dataset.locationIndex = String(index);
+                pin.dataset.region = getCityPin(city)?.dataset.region || 'all';
                 pin.style.setProperty('--loc-x', Math.max(18, Math.min(80, point.x + offset.x)) + '%');
                 pin.style.setProperty('--loc-y', Math.max(8, Math.min(92, point.y + offset.y)) + '%');
                 pin.setAttribute('aria-label', 'Show ' + location.name + ' in ' + city);
@@ -331,6 +365,39 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         mapBoard.appendChild(layer);
+    }
+
+    function applyMapRegion(region) {
+        activeRegion = region || 'all';
+        if (mapSection) {
+            mapSection.dataset.mapRegion = activeRegion;
+        }
+
+        mapRegionButtons.forEach(function(button) {
+            const active = button.dataset.mapRegion === activeRegion;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        mapPins.forEach(function(pin) {
+            const muted = !pinMatchesRegion(pin, activeRegion);
+            pin.classList.toggle('region-muted', muted);
+            pin.tabIndex = muted ? -1 : 0;
+        });
+
+        document.querySelectorAll('.location-pin').forEach(function(pin) {
+            const muted = activeRegion !== 'all' && pin.dataset.region !== activeRegion;
+            pin.classList.toggle('region-muted', muted);
+            pin.tabIndex = muted ? -1 : 0;
+        });
+
+        const activePin = document.querySelector('.map-pin.active');
+        if (!activePin || !pinMatchesRegion(activePin, activeRegion)) {
+            const nextPin = getFirstRegionPin(activeRegion) || mapPins[0];
+            if (nextPin) {
+                activateMapPin(nextPin);
+            }
+        }
     }
 
     function setMapMode(mode) {
@@ -353,6 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const cityPin = document.querySelector('.map-pin.active') || mapPins[0];
             activateMapPin(cityPin);
         }
+        applyMapRegion(activeRegion);
     }
 
     if (mapPins.length) {
@@ -388,7 +456,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 setMapMode(button.dataset.mapModeButton || 'clusters');
             });
         });
+        mapRegionButtons.forEach(function(button) {
+            button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+            button.addEventListener('click', function() {
+                applyMapRegion(button.dataset.mapRegion || 'all');
+            });
+        });
         activateMapPin(document.querySelector('.map-pin.active') || mapPins[0]);
+        applyMapRegion('all');
     }
 
     // Phone number formatting

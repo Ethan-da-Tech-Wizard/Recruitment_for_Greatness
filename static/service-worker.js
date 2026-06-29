@@ -1,4 +1,4 @@
-const CACHE_NAME = 'better-at-shea-v1';
+const CACHE_NAME = 'better-at-shea-v2';
 const APP_SHELL = [
     '/',
     '/manifest.webmanifest',
@@ -9,7 +9,12 @@ const APP_SHELL = [
     '/static/js/admin.js',
     '/static/js/app-install.js',
     '/static/images/app-icon.svg',
-    '/static/images/generated/better-at-shea-hero.jpg'
+    '/static/images/generated/better-at-shea-hero.jpg',
+    '/static/images/generated/shea-hero-care.jpg',
+    '/static/images/generated/shea-leadership-team.jpg',
+    '/static/images/generated/shea-therapy-progress.jpg',
+    '/static/images/generated/shea-resident-care.jpg',
+    '/static/images/generated/shea-hospitality-support.jpg'
 ];
 
 self.addEventListener('install', (event) => {

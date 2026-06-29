@@ -152,8 +152,8 @@
 .hero {
     min-height: 440px;
     background:
-        linear-gradient(90deg, rgba(0, 63, 79, 0.92) 0%, rgba(0, 95, 115, 0.74) 42%, rgba(0, 95, 115, 0.16) 100%),
-        url('../images/generated/better-at-shea-hero.jpg') center right / cover no-repeat;
+        linear-gradient(90deg, rgba(0, 63, 79, 0.94) 0%, rgba(0, 95, 115, 0.78) 39%, rgba(0, 95, 115, 0.12) 100%),
+        url('../images/generated/shea-hero-care.jpg') center right / cover no-repeat;
     color: var(--white);
     padding: 3rem var(--spacing-lg);
     display: flex;
@@ -553,8 +553,9 @@
 .az-map-section {
     align-items: stretch;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 251, 0.96)),
-        linear-gradient(90deg, rgba(0, 95, 115, 0.08), transparent);
+        radial-gradient(circle at 78% 18%, rgba(123, 176, 231, 0.34), transparent 22rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 251, 0.94)),
+        linear-gradient(90deg, rgba(47, 111, 115, 0.1), transparent);
     border: 1px solid rgba(0, 95, 115, 0.14);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -596,6 +597,32 @@
     font-size: var(--font-size-lg);
 }
 
+.map-proof-grid {
+    display: grid;
+    gap: var(--spacing-sm);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: var(--spacing-lg) 0;
+}
+
+.map-proof-grid span {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(47, 111, 115, 0.14);
+    border-radius: var(--radius-md);
+    color: var(--gray-600);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    line-height: 1.25;
+    padding: 0.72rem;
+}
+
+.map-proof-grid strong {
+    color: var(--maroon);
+    display: block;
+    font-size: var(--font-size-xl);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
 .shea-commentary.map-note {
     background: var(--white);
 }
@@ -616,9 +643,11 @@
     gap: var(--spacing-md);
     grid-column: 1 / -1;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.map-mode-controls {
+.map-mode-controls,
+.map-region-controls {
     background: rgba(37, 79, 85, 0.08);
     border: 1px solid rgba(0, 95, 115, 0.16);
     border-radius: var(--radius-full);
@@ -626,7 +655,13 @@
     padding: 0.25rem;
 }
 
-.map-mode-controls button {
+.map-region-controls {
+    background: rgba(255, 255, 255, 0.72);
+    gap: 0.12rem;
+}
+
+.map-mode-controls button,
+.map-region-controls button {
     background: transparent;
     border: 0;
     border-radius: var(--radius-full);
@@ -639,7 +674,14 @@
     transition: background-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.map-mode-controls button.active {
+.map-region-controls button {
+    font-size: var(--font-size-xs);
+    min-height: 1.95rem;
+    padding: 0.36rem 0.62rem;
+}
+
+.map-mode-controls button.active,
+.map-region-controls button.active {
     background: var(--maroon);
     box-shadow: 0 8px 18px rgba(0, 95, 115, 0.18);
     color: var(--white);
@@ -671,8 +713,9 @@
 
 .az-map-board {
     background:
-        radial-gradient(circle at 62% 42%, rgba(123, 176, 231, 0.24), transparent 13rem),
-        linear-gradient(145deg, rgba(37, 79, 85, 0.98), rgba(47, 111, 115, 0.94));
+        radial-gradient(circle at 63% 40%, rgba(217, 249, 157, 0.28), transparent 7rem),
+        radial-gradient(circle at 58% 54%, rgba(123, 176, 231, 0.28), transparent 13rem),
+        linear-gradient(145deg, rgba(20, 58, 64, 0.98), rgba(47, 111, 115, 0.96));
     border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: var(--radius-lg);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), var(--shadow-md);
@@ -706,6 +749,74 @@
     animation: mapSweep 5.5s ease-in-out infinite;
 }
 
+.map-radar {
+    aspect-ratio: 1;
+    border: 1px solid rgba(217, 249, 157, 0.24);
+    border-radius: var(--radius-full);
+    box-shadow:
+        0 0 0 1.8rem rgba(217, 249, 157, 0.06),
+        0 0 0 3.8rem rgba(123, 176, 231, 0.05),
+        0 0 0 6.2rem rgba(255, 255, 255, 0.035);
+    height: 7.5rem;
+    left: 63%;
+    opacity: 0.92;
+    pointer-events: none;
+    position: absolute;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.map-radar::after {
+    animation: radarSweep 5.4s linear infinite;
+    background: conic-gradient(from 0deg, rgba(217, 249, 157, 0.34), transparent 44deg);
+    border-radius: inherit;
+    content: "";
+    inset: -6.2rem;
+    mask-image: radial-gradient(circle, transparent 0 27%, #000 28% 100%);
+    position: absolute;
+}
+
+.map-route-layer {
+    height: 100%;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+.route-line {
+    animation: routeTrace 4.4s ease-in-out infinite;
+    fill: none;
+    opacity: 0.7;
+    stroke: rgba(191, 231, 238, 0.78);
+    stroke-dasharray: 4 8;
+    stroke-linecap: round;
+    stroke-width: 0.55;
+}
+
+.route-line-northwest {
+    animation-delay: 0.45s;
+}
+
+.route-line-east {
+    animation-delay: 0.75s;
+}
+
+.route-line-southeast {
+    animation-delay: 1.05s;
+}
+
+.route-line-south {
+    animation-delay: 1.35s;
+}
+
+.route-line-near {
+    animation-delay: 1.65s;
+}
+
 .az-map-shape {
     background:
         linear-gradient(145deg, rgba(238, 247, 251, 0.2), rgba(123, 176, 231, 0.1)),
@@ -714,6 +825,38 @@
     clip-path: polygon(31% 4%, 78% 11%, 70% 92%, 23% 92%, 27% 60%, 18% 52%, 27% 43%);
     inset: 1.2rem;
     position: absolute;
+}
+
+.map-home-callout {
+    background: rgba(255, 255, 255, 0.91);
+    border: 1px solid rgba(217, 249, 157, 0.62);
+    border-radius: var(--radius-md);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    color: var(--maroon-dark);
+    left: 66%;
+    padding: 0.48rem 0.62rem;
+    pointer-events: none;
+    position: absolute;
+    top: 28%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.map-home-callout span {
+    color: var(--gold-dark);
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.map-home-callout strong {
+    display: block;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .az-map-shape::before,
@@ -790,6 +933,12 @@
     z-index: 3;
 }
 
+.map-pin.region-muted,
+.location-pin.region-muted {
+    opacity: 0.14;
+    pointer-events: none;
+}
+
 .az-map-section[data-map-mode="locations"] .map-pin {
     opacity: 0.4;
 }
@@ -816,6 +965,11 @@
     height: 1.05rem;
     position: absolute;
     width: 1.05rem;
+}
+
+.pin-scottsdale::after {
+    background: #d9f99d;
+    box-shadow: 0 0 0 9px rgba(217, 249, 157, 0.18), 0 0 34px rgba(217, 249, 157, 0.72);
 }
 
 .map-pin span {
@@ -1029,7 +1183,8 @@
 
 .map-detail {
     align-self: stretch;
-    background: var(--white);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 247, 251, 0.88));
     border: 1px solid rgba(0, 95, 115, 0.14);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
@@ -1038,6 +1193,13 @@
     justify-content: flex-start;
     min-height: 100%;
     padding: var(--spacing-lg);
+}
+
+.map-detail-top {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: space-between;
 }
 
 .map-detail-label {
@@ -1050,6 +1212,25 @@
     text-transform: uppercase;
 }
 
+.map-detail-live {
+    align-items: center;
+    color: var(--maroon-dark);
+    display: inline-flex;
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    gap: 0.34rem;
+}
+
+.map-detail-live::before {
+    animation: pinPulse 2.4s ease-in-out infinite;
+    background: #d9f99d;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 5px rgba(217, 249, 157, 0.18);
+    content: "";
+    height: 0.44rem;
+    width: 0.44rem;
+}
+
 .map-detail h3 {
     color: var(--maroon);
     font-size: var(--font-size-2xl);
@@ -1059,6 +1240,37 @@
 .map-detail p {
     color: var(--gray-700);
     margin-bottom: var(--spacing-md);
+}
+
+.map-detail-metrics {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: var(--spacing-md);
+}
+
+.map-detail-metrics span {
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(47, 111, 115, 0.12);
+    border-radius: var(--radius-md);
+    padding: 0.55rem;
+}
+
+.map-detail-metrics small {
+    color: var(--gray-500);
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.22rem;
+    text-transform: uppercase;
+}
+
+.map-detail-metrics b {
+    color: var(--maroon-dark);
+    display: block;
+    font-size: var(--font-size-xs);
+    line-height: 1.25;
 }
 
 .map-location-list {
@@ -1132,6 +1344,23 @@
     50% {
         opacity: 0.88;
         transform: scale(1.2);
+    }
+}
+
+@keyframes radarSweep {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes routeTrace {
+    0%, 100% {
+        stroke-dashoffset: 0;
+        opacity: 0.42;
+    }
+    50% {
+        stroke-dashoffset: -28;
+        opacity: 1;
     }
 }
 
@@ -1289,18 +1518,48 @@
     width: 100%;
     height: 150px;
     background:
-        linear-gradient(135deg, rgba(47, 111, 115, 0.08), rgba(123, 176, 231, 0.18)),
-        linear-gradient(135deg, var(--gray-100), var(--gray-200));
+        linear-gradient(180deg, rgba(0, 63, 79, 0.02), rgba(0, 63, 79, 0.52)),
+        var(--gold-light);
+    background-position: center;
+    background-size: cover;
     border-radius: var(--radius-md);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
     margin-bottom: var(--spacing-md);
-    color: var(--gray-500);
-    font-weight: 500;
-    border: 2px dashed var(--gray-300);
+    color: var(--white);
+    font-weight: 800;
+    border: 1px solid rgba(47, 111, 115, 0.12);
     overflow: hidden;
     position: relative;
+}
+
+.dept-image-placeholder[data-dept="nursing"],
+.dept-image-placeholder[data-dept="cna"] {
+    background-image:
+        linear-gradient(180deg, rgba(0, 63, 79, 0.02), rgba(0, 63, 79, 0.54)),
+        url('../images/generated/shea-resident-care.jpg');
+}
+
+.dept-image-placeholder[data-dept="therapy"] {
+    background-image:
+        linear-gradient(180deg, rgba(0, 63, 79, 0.02), rgba(0, 63, 79, 0.54)),
+        url('../images/generated/shea-therapy-progress.jpg');
+}
+
+.dept-image-placeholder[data-dept="culinary"],
+.dept-image-placeholder[data-dept="housekeeping"],
+.dept-image-placeholder[data-dept="activities"] {
+    background-image:
+        linear-gradient(180deg, rgba(0, 63, 79, 0.02), rgba(0, 63, 79, 0.54)),
+        url('../images/generated/shea-hospitality-support.jpg');
+}
+
+.dept-image-placeholder[data-dept="social"],
+.dept-image-placeholder[data-dept="admin"] {
+    background-image:
+        linear-gradient(180deg, rgba(0, 63, 79, 0.02), rgba(0, 63, 79, 0.54)),
+        url('../images/generated/shea-leadership-team.jpg');
 }
 
 .dept-image-placeholder::after {
@@ -1313,6 +1572,17 @@
     transform: skewX(-18deg);
     transition: left 600ms ease;
     width: 45%;
+}
+
+.dept-image-placeholder span {
+    background: rgba(0, 63, 79, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-full);
+    color: var(--white);
+    font-size: var(--font-size-xs);
+    line-height: 1;
+    margin: var(--spacing-sm);
+    padding: 0.38rem 0.58rem;
 }
 
 .department-card:hover .dept-image-placeholder::after,
@@ -1728,7 +1998,7 @@
 .about-hero {
     background:
         linear-gradient(90deg, rgba(0, 63, 79, 0.92), rgba(0, 95, 115, 0.62)),
-        url('../images/generated/better-at-shea-hero.jpg') center / cover no-repeat;
+        url('../images/generated/shea-hero-care.jpg') center / cover no-repeat;
     color: var(--white);
     padding: var(--spacing-2xl) var(--spacing-lg);
     text-align: center;
@@ -1792,8 +2062,8 @@
 .story-image-placeholder {
     height: 300px;
     background:
-        linear-gradient(180deg, rgba(47, 111, 115, 0.08), rgba(123, 176, 231, 0.18)),
-        url('../images/generated/better-at-shea-hero.jpg') center / cover no-repeat;
+        linear-gradient(180deg, rgba(47, 111, 115, 0.02), rgba(0, 63, 79, 0.45)),
+        url('../images/generated/shea-leadership-team.jpg') center / cover no-repeat;
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -2204,8 +2474,23 @@
         flex: 1;
     }
 
+    .map-region-controls {
+        border-radius: var(--radius-md);
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .map-region-controls button {
+        flex: 1 1 30%;
+    }
+
     .map-stat-strip {
         justify-content: flex-start;
+    }
+
+    .map-proof-grid,
+    .map-detail-metrics {
+        grid-template-columns: 1fr;
     }
 
     .az-map-board {
@@ -2224,6 +2509,11 @@
     .location-pin span {
         display: none;
     }
+
+    .map-home-callout {
+        left: 67%;
+        top: 26%;
+    }
     
     .facility-stats {
         flex-wrap: wrap;
@@ -2232,5 +2522,23 @@
     
     .hero h2 {
         font-size: var(--font-size-2xl);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .map-radar::after,
+    .route-line,
+    .az-map-board::after,
+    .map-pin::before,
+    .map-detail-live::before,
+    .location-pin::after {
+        animation: none;
+    }
+
+    .map-pin,
+    .location-pin,
+    .map-mode-controls button,
+    .map-region-controls button {
+        transition: none;
     }
 }
