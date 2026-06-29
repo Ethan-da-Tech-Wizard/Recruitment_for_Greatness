@@ -15,7 +15,7 @@ from public_app.app import app, get_local_ip
 if __name__ == '__main__':
     local_ip = get_local_ip()
     print("\n" + "=" * 60)
-    print("   SHEA PARC - PUBLIC RECRUITMENT FORM")
+    print("   SHEA PARC - PUBLIC ADMIN FORM")
     print("=" * 60)
     print(f"\n   Local Access:  http://localhost:5000")
     print(f"   LAN Access:    http://{local_ip}:5000")

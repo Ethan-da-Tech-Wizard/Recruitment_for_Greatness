@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Launch the Admin Dashboard Application.
-This is for recruiters to manage candidates.
+This is for admins to manage candidates.
 """
 
 import os
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     print("   SHEA PARC - ADMIN DASHBOARD")
     print("=" * 60)
     print(f"\n   Access URL:  http://localhost:5001")
-    print("\n   This dashboard is for recruiters only.")
+    print("\n   This dashboard is for admins only.")
     print("   Do NOT share this URL with candidates.")
     print("=" * 60 + "\n")
     

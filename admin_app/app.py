@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Admin Dashboard Application for Shea Post Acute Rehabilitation Center Recruitment.
-This is the recruiter-facing application for managing candidates.
+Admin Dashboard Application for Shea Post Acute Rehabilitation Center Admin.
+This is the admin-facing application for managing candidates.
 """
 
 import os
@@ -31,7 +31,7 @@ init_database()
 
 @app.before_request
 def require_admin_pin():
-    """Require the recruiter PIN before showing admin data."""
+    """Require the admin PIN before showing admin data."""
     open_endpoints = {'login', 'health_check', 'static'}
     if request.endpoint in open_endpoints:
         return None
@@ -42,7 +42,7 @@ def require_admin_pin():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """PIN login page for recruiters."""
+    """PIN login page for admins."""
     next_url = request.args.get('next') or url_for('dashboard')
     if not next_url.startswith('/'):
         next_url = url_for('dashboard')
@@ -62,7 +62,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    """Log recruiters out of the admin dashboard."""
+    """Log admins out of the admin dashboard."""
     session.pop('admin_authenticated', None)
     flash('You have been logged out.', 'success')
     return redirect(url_for('login'))
@@ -197,7 +197,7 @@ if __name__ == '__main__':
     print("   SHEA PARC - ADMIN DASHBOARD")
     print("=" * 60)
     print(f"\n   Access URL:  http://localhost:5001")
-    print("\n   This dashboard is for recruiters only.")
+    print("\n   This dashboard is for admins only.")
     print("   Do NOT share this URL with candidates.")
     print("=" * 60 + "\n")
     

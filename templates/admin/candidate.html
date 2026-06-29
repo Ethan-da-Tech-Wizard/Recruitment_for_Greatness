@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ candidate.first_name }} {{ candidate.last_name }} | Shea PARC Recruitment</title>
+    <title>{{ candidate.first_name }} {{ candidate.last_name }} | Shea PARC Admin</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="header-text">
                     <h1>Candidate Database</h1>
-                    <p class="tagline">Shea Post Acute Rehabilitation Center - PIN-Protected Recruiter View</p>
+                    <p class="tagline">Shea Post Acute Rehabilitation Center - PIN-Protected Admin View</p>
                 </div>
             </div>
             <div class="header-actions">
@@ -187,7 +187,7 @@
                             <line x1="16" y1="13" x2="8" y2="13"></line>
                             <line x1="16" y1="17" x2="8" y2="17"></line>
                         </svg>
-                        Recruiter Notes
+                        Admin Notes
                     </h2>
                     <form action="{{ url_for('update_notes', candidate_id=candidate.id) }}" method="POST" class="notes-form">
                         <textarea name="notes" rows="6" placeholder="Add notes about your conversation, follow-up items, or any relevant information...">{{ candidate.notes or '' }}</textarea>

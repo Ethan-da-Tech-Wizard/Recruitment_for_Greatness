@@ -1,7 +1,7 @@
-# Shea PARC Recruitment Pipeline
+# Shea PARC Admin Pipeline
 
 ## Overview
-A professional, inviting recruitment application designed for job fairs and in-person recruiting events. This two-app system allows potential candidates to fill out interest forms while recruiters manage and track follow-ups through a separate admin interface.
+A professional, inviting admin application designed for job fairs and in-person hiring events. This two-app system allows potential candidates to fill out interest forms while admins manage and track follow-ups through a separate admin interface.
 
 ---
 
@@ -9,7 +9,7 @@ A professional, inviting recruitment application designed for job fairs and in-p
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        SHEA PARC RECRUITMENT PIPELINE                           │
+│                          SHEA PARC ADMIN PIPELINE                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌──────────────────────┐         ┌──────────────────────┐                 │
@@ -116,7 +116,7 @@ python run_both.py
 - Team photo galleries by department
 - Mobile-responsive design
 
-### Admin Dashboard (Recruiter-Facing)
+### Admin Dashboard (Admin-Facing)
 - View all submitted leads
 - Filter by status:
   - New (Uncontacted)
@@ -186,7 +186,7 @@ To find your IP address:
 ## File Structure
 
 ```
-Recruitment_for_Greatness/
+Better_at_Shea/
 ├── README.md
 ├── requirements.txt
 ├── run_public.py          # Launch public app

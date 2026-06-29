@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Public Form Application for Shea Post Acute Rehabilitation Center Recruitment.
+Public Form Application for Shea Post Acute Rehabilitation Center Admin.
 This is the candidate-facing application for job fairs.
 """
 
@@ -17,7 +17,7 @@ from shared.database import add_candidate, init_database, DEPARTMENTS
 app = Flask(__name__,
             template_folder='../templates/public',
             static_folder='../static')
-app.secret_key = 'shea-parc-recruitment-2026'
+app.secret_key = 'shea-parc-admin-2026'
 ADMIN_DATABASE_URL = os.environ.get('ADMIN_DATABASE_URL', 'http://localhost:5001').rstrip('/')
 
 # Ensure database exists
@@ -82,7 +82,7 @@ def about():
 
 @app.route('/database')
 def database_entry():
-    """Send recruiters to the PIN-protected candidate database."""
+    """Send admins to the PIN-protected candidate database."""
     return redirect(f'{ADMIN_DATABASE_URL}/login?next=/')
 
 
@@ -108,7 +108,7 @@ def get_local_ip():
 if __name__ == '__main__':
     local_ip = get_local_ip()
     print("\n" + "=" * 60)
-    print("   SHEA PARC - PUBLIC RECRUITMENT FORM")
+    print("   SHEA PARC - PUBLIC ADMIN FORM")
     print("=" * 60)
     print(f"\n   Local Access:  http://localhost:5000")
     print(f"   LAN Access:    http://{local_ip}:5000")

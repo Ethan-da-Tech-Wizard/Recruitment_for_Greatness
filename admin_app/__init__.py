@@ -1,1 +1,1 @@
-"""Admin Dashboard Application for Shea PARC Recruitment"""
+"""Admin Dashboard Application for Shea PARC Admin"""

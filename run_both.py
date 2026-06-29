@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Launch both applications simultaneously.
-Use this for job fairs and recruitment events.
+Use this for job fairs and hiring events.
 """
 
 import os
@@ -38,13 +38,13 @@ if __name__ == '__main__':
     local_ip = get_local_ip()
     
     print("\n" + "=" * 70)
-    print("   SHEA PARC RECRUITMENT PIPELINE")
+    print("   SHEA PARC ADMIN PIPELINE")
     print("   Both Applications Starting...")
     print("=" * 70)
     print("\n   PUBLIC FORM (Share with candidates):")
     print(f"     - Local:  http://localhost:5000")
     print(f"     - LAN:    http://{local_ip}:5000")
-    print("\n   ADMIN DASHBOARD (Recruiters only):")
+    print("\n   ADMIN DASHBOARD (Admins only):")
     print(f"     - URL:    http://localhost:5001")
     print("\n   Press Ctrl+C to stop both applications.")
     print("=" * 70 + "\n")

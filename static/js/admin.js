@@ -1,5 +1,5 @@
 /**
- * Shea PARC Recruitment Pipeline
+ * Shea PARC Admin Pipeline
  * Admin Dashboard JavaScript
  */
 

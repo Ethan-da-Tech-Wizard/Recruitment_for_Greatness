@@ -1,4 +1,4 @@
-# Shea PARC Recruitment Pipeline Dependencies
+# Shea PARC Admin Pipeline Dependencies
 # Lightweight stack for low-resource systems
 
 Flask==3.0.0

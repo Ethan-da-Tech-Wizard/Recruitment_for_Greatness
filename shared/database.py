@@ -1,5 +1,5 @@
 """
-Database operations for Shea PARC Recruitment Pipeline.
+Database operations for Shea PARC Admin Pipeline.
 Uses SQLite for local, offline-capable storage.
 """
 
