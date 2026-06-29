@@ -156,12 +156,115 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const mapPins = document.querySelectorAll('.map-pin');
     const mapBoard = document.querySelector('.az-map-board');
+    const mapSection = document.querySelector('.az-map-section');
+    const mapModeButtons = document.querySelectorAll('[data-map-mode-button]');
     const mapDetail = document.querySelector('.map-detail');
     const mapDetailLabel = mapDetail ? mapDetail.querySelector('.map-detail-label') : null;
     const mapDetailTitle = mapDetail ? mapDetail.querySelector('h3') : null;
     const mapDetailCopy = mapDetail ? mapDetail.querySelector('p') : null;
     const mapLocationList = mapDetail ? mapDetail.querySelector('.map-location-list') : null;
     const mapDetailNote = mapDetail ? mapDetail.querySelector('strong') : null;
+    const mapCityPoints = {
+        'Scottsdale': { x: 63, y: 40 },
+        'Phoenix': { x: 55, y: 47 },
+        'Mesa': { x: 71, y: 48 },
+        'Glendale': { x: 48, y: 44 },
+        'Peoria': { x: 43, y: 39 },
+        'Surprise': { x: 36, y: 34 },
+        'Tempe': { x: 56, y: 52 },
+        'Chandler': { x: 64, y: 58 },
+        'Tucson': { x: 58, y: 78 },
+        'Youngtown': { x: 41, y: 36 },
+        'Sun City West': { x: 33, y: 31 },
+        'Gilbert': { x: 72, y: 62 },
+        'Avondale': { x: 45, y: 48 },
+        'Fountain Hills': { x: 74, y: 38 },
+        'Prescott': { x: 38, y: 18 }
+    };
+    const locationOffsets = [
+        { x: 0, y: 0 },
+        { x: 4.6, y: -4.2 },
+        { x: -4.6, y: 4.2 },
+        { x: 4.8, y: 4.6 },
+        { x: -4.8, y: -4.6 },
+        { x: 0.2, y: -6.6 },
+        { x: 0.3, y: 6.8 },
+        { x: 6.8, y: 0.2 },
+        { x: -6.8, y: -0.2 }
+    ];
+    let activeLocationPin = null;
+
+    if (mapSection) {
+        mapSection.dataset.mapMode = 'clusters';
+    }
+
+    function getCityPin(city) {
+        return Array.from(mapPins).find(function(pin) {
+            return pin.dataset.city === city;
+        });
+    }
+
+    function formatLocationAddress(location, city) {
+        return location.address + ', ' + city + ', AZ';
+    }
+
+    function renderLocationList(city, selectedIndex) {
+        const locations = mapLocations[city] || [];
+        mapLocationList.replaceChildren();
+        locations.forEach(function(location, index) {
+            const item = document.createElement('li');
+            const name = document.createElement('span');
+            const address = document.createElement('small');
+            item.tabIndex = 0;
+            item.classList.toggle('active', index === selectedIndex);
+            name.textContent = location.name;
+            address.textContent = formatLocationAddress(location, city);
+            item.appendChild(name);
+            item.appendChild(address);
+            item.addEventListener('click', function() {
+                activateLocation(city, index);
+            });
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activateLocation(city, index);
+                }
+            });
+            mapLocationList.appendChild(item);
+        });
+    }
+
+    function activateLocation(city, index) {
+        if (!mapDetail || !mapDetailLabel || !mapDetailTitle || !mapDetailCopy || !mapLocationList || !mapDetailNote) {
+            return;
+        }
+        const locations = mapLocations[city] || [];
+        const location = locations[index];
+        const cityPin = getCityPin(city);
+        if (!location || !cityPin) {
+            return;
+        }
+
+        mapPins.forEach(function(item) {
+            item.classList.toggle('active', item === cityPin);
+            item.setAttribute('aria-pressed', item === cityPin ? 'true' : 'false');
+        });
+
+        document.querySelectorAll('.location-pin').forEach(function(pin) {
+            const active = pin.dataset.city === city && Number(pin.dataset.locationIndex) === index;
+            pin.classList.toggle('active', active);
+            pin.setAttribute('aria-pressed', active ? 'true' : 'false');
+            if (active) {
+                activeLocationPin = pin;
+            }
+        });
+
+        mapDetailLabel.textContent = city + ' - location ' + (index + 1) + ' of ' + locations.length;
+        mapDetailTitle.textContent = location.name;
+        mapDetailCopy.textContent = formatLocationAddress(location, city);
+        renderLocationList(city, index);
+        mapDetailNote.textContent = cityPin.dataset.note || 'Same care energy, different doorway.';
+    }
 
     function activateMapPin(pin) {
         if (!pin || !mapDetail || !mapDetailLabel || !mapDetailTitle || !mapDetailCopy || !mapLocationList || !mapDetailNote) {
@@ -176,24 +279,84 @@ document.addEventListener('DOMContentLoaded', function() {
         const city = pin.dataset.city || 'Arizona';
         const locations = mapLocations[city] || [];
 
+        activeLocationPin = null;
+        document.querySelectorAll('.location-pin').forEach(function(item) {
+            item.classList.remove('active');
+            item.setAttribute('aria-pressed', 'false');
+        });
         mapDetailLabel.textContent = (pin.dataset.zone || 'Care Network Area') + ' - ' + (pin.dataset.count || locations.length + ' locations');
         mapDetailTitle.textContent = city;
         mapDetailCopy.textContent = pin.dataset.copy || '';
-        mapLocationList.replaceChildren();
-        locations.forEach(function(location) {
-            const item = document.createElement('li');
-            const name = document.createElement('span');
-            const address = document.createElement('small');
-            name.textContent = location.name;
-            address.textContent = location.address + ', ' + city + ', AZ';
-            item.appendChild(name);
-            item.appendChild(address);
-            mapLocationList.appendChild(item);
-        });
+        renderLocationList(city, -1);
         mapDetailNote.textContent = pin.dataset.note || '';
     }
 
+    function buildLocationPins() {
+        if (!mapBoard || mapBoard.querySelector('.location-pin-layer')) {
+            return;
+        }
+
+        const layer = document.createElement('div');
+        layer.className = 'location-pin-layer';
+        Object.keys(mapLocations).forEach(function(city) {
+            const point = mapCityPoints[city];
+            const locations = mapLocations[city];
+            if (!point || !locations) {
+                return;
+            }
+            locations.forEach(function(location, index) {
+                const offset = locationOffsets[index % locationOffsets.length];
+                const pin = document.createElement('button');
+                const label = document.createElement('span');
+                pin.type = 'button';
+                pin.className = 'location-pin';
+                pin.dataset.city = city;
+                pin.dataset.locationIndex = String(index);
+                pin.style.setProperty('--loc-x', Math.max(18, Math.min(80, point.x + offset.x)) + '%');
+                pin.style.setProperty('--loc-y', Math.max(8, Math.min(92, point.y + offset.y)) + '%');
+                pin.setAttribute('aria-label', 'Show ' + location.name + ' in ' + city);
+                pin.setAttribute('aria-pressed', 'false');
+                label.textContent = location.name;
+                pin.appendChild(label);
+                pin.addEventListener('click', function() {
+                    activateLocation(city, index);
+                });
+                pin.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        activateLocation(city, index);
+                    }
+                });
+                layer.appendChild(pin);
+            });
+        });
+        mapBoard.appendChild(layer);
+    }
+
+    function setMapMode(mode) {
+        if (!mapSection) {
+            return;
+        }
+        mapSection.dataset.mapMode = mode;
+        mapModeButtons.forEach(function(button) {
+            const active = button.dataset.mapModeButton === mode;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        if (mode === 'locations') {
+            buildLocationPins();
+            if (!activeLocationPin) {
+                const city = document.querySelector('.map-pin.active')?.dataset.city || 'Scottsdale';
+                activateLocation(city, 0);
+            }
+        } else {
+            const cityPin = document.querySelector('.map-pin.active') || mapPins[0];
+            activateMapPin(cityPin);
+        }
+    }
+
     if (mapPins.length) {
+        buildLocationPins();
         mapPins.forEach(function(pin) {
             pin.setAttribute('aria-pressed', pin.classList.contains('active') ? 'true' : 'false');
             pin.addEventListener('click', function() {
@@ -208,12 +371,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         if (mapBoard) {
             mapBoard.addEventListener('pointerup', function(e) {
-                const pin = e.target && e.target.closest ? e.target.closest('.map-pin') : null;
-                if (pin) {
-                    activateMapPin(pin);
+                const target = e.target && e.target.closest ? e.target.closest('.map-pin, .location-pin') : null;
+                if (!target) {
+                    return;
+                }
+                if (target.classList.contains('location-pin')) {
+                    activateLocation(target.dataset.city, Number(target.dataset.locationIndex));
+                } else {
+                    activateMapPin(target);
                 }
             });
         }
+        mapModeButtons.forEach(function(button) {
+            button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+            button.addEventListener('click', function() {
+                setMapMode(button.dataset.mapModeButton || 'clusters');
+            });
+        });
         activateMapPin(document.querySelector('.map-pin.active') || mapPins[0]);
     }
 
