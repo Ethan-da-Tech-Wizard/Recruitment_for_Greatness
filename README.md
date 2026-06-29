@@ -47,7 +47,7 @@ A professional, inviting admin application designed for job fairs and in-person 
 | Backend | Python 3.x + Flask | Lightweight, easy to deploy, low resource usage |
 | Database | SQLite | Local storage, no server needed, portable |
 | Frontend | HTML5 + CSS3 + Vanilla JS | No build tools, works offline, fast loading |
-| Styling | Custom CSS (Deep Teal, Amber, White) | Brand colors, professional appearance |
+| Styling | Custom CSS (Shea-inspired teal, aqua, white) | Brand colors, professional appearance |
 
 ### Why This Stack?
 - **Low Resource Requirements**: Runs on 4-8GB RAM, no GPU needed
@@ -102,6 +102,15 @@ python run_both.py
 ### 4. Access the Apps
 - **Public Form**: http://localhost:5000 (or http://<your-ip>:5000 for LAN)
 - **Admin Dashboard**: http://localhost:5001
+- Use **Admin Database** in the public nav to open the PIN-protected dashboard.
+- Use **Public Site** in the admin header to return to the public app without editing the URL.
+
+The public form is available on the laptop and local WiFi network. The admin dashboard is bound to `127.0.0.1`, so it stays on the laptop running the app.
+
+### Installable App Mode
+Better at Shea includes installable web app support. In Chrome, Edge, or another PWA-capable browser, open http://localhost:5000 and use the browser's install option or the **Install App** prompt when it appears. It will launch in its own app-style window as **Better at Shea**.
+
+The local server still needs to be running for form submissions and the admin database. For a true double-click desktop app package, the next step would be wrapping this same local Flask system with Electron, Tauri, or a small native launcher.
 
 ---
 
@@ -137,10 +146,10 @@ python run_both.py
 
 | Color | Hex Code | Usage |
 |-------|----------|-------|
-| Deep Teal | #005F73 | Primary headers, buttons |
-| Amber | #EE9B00 | Accents, highlights, hover states |
+| Deep Shea Teal | #2F6F73 | Primary headers, buttons |
+| Aqua Blue | #7BB0E7 | Accents, highlights, status details |
 | White | #FFFFFF | Background, text on dark |
-| Soft Teal | #EDF6F4 | Secondary backgrounds |
+| Soft Aqua | #EEF7FB | Secondary backgrounds |
 
 ---
 

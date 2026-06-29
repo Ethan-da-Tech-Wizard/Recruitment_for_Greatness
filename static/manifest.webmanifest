@@ -1,0 +1,33 @@
+{
+  "name": "Better at Shea",
+  "short_name": "Better at Shea",
+  "description": "Offline-friendly Shea PARC candidate and admin app.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eef7fb",
+  "theme_color": "#2f6f73",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/images/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Candidate Form",
+      "short_name": "Form",
+      "description": "Open the candidate interest form",
+      "url": "/"
+    },
+    {
+      "name": "Admin Database",
+      "short_name": "Admin",
+      "description": "Open the PIN-protected admin database",
+      "url": "/database"
+    }
+  ]
+}

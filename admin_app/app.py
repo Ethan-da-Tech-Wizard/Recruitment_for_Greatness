@@ -24,9 +24,16 @@ app = Flask(__name__,
             static_folder='../static')
 app.secret_key = 'shea-parc-admin-2026'
 ADMIN_PIN = os.environ.get('ADMIN_PIN', '1234')
+PUBLIC_APP_URL = os.environ.get('PUBLIC_APP_URL', 'http://localhost:5000').rstrip('/')
 
 # Ensure database exists
 init_database()
+
+
+@app.context_processor
+def inject_app_links():
+    """Make cross-app navigation available in admin templates."""
+    return {'public_app_url': PUBLIC_APP_URL}
 
 
 @app.before_request

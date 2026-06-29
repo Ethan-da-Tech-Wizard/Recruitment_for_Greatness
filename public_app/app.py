@@ -10,7 +10,7 @@ import sys
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_from_directory
 from shared.database import add_candidate, init_database, DEPARTMENTS
 
 # Initialize Flask app
@@ -84,6 +84,18 @@ def about():
 def database_entry():
     """Send admins to the PIN-protected candidate database."""
     return redirect(f'{ADMIN_DATABASE_URL}/login?next=/')
+
+
+@app.route('/manifest.webmanifest')
+def manifest():
+    """Serve the installable app manifest."""
+    return send_from_directory(app.static_folder, 'manifest.webmanifest', mimetype='application/manifest+json')
+
+
+@app.route('/service-worker.js')
+def service_worker():
+    """Serve the service worker from the app root for install support."""
+    return send_from_directory(app.static_folder, 'service-worker.js', mimetype='application/javascript')
 
 
 @app.route('/api/health')

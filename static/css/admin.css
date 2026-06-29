@@ -150,6 +150,19 @@
     width: 100%;
 }
 
+.pin-public-link {
+    color: var(--maroon);
+    display: inline-flex;
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    margin-top: var(--spacing-lg);
+}
+
+.pin-public-link:hover {
+    color: var(--maroon-dark);
+    text-decoration: underline;
+}
+
 /* Admin Main Layout */
 .admin-main {
     display: grid;
