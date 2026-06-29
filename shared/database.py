@@ -13,13 +13,13 @@ DB_PATH = os.path.join(os.path.dirname(__file__), 'shea_parc_data.db')
 
 # Status options for candidates
 STATUS_OPTIONS = [
-    ('new', 'New - Uncontacted'),
-    ('called_no_answer', 'Called - No Answer'),
-    ('already_called', 'Already Called'),
+    ('new', 'New'),
+    ('called_no_answer', 'No Answer'),
+    ('already_called', 'Contacted'),
     ('do_not_call', 'Do Not Call'),
     ('interested', 'Interested'),
     ('not_interested', 'Not Interested'),
-    ('interested_conflicts', 'Interested but Conflicts')
+    ('interested_conflicts', 'Conflict')
 ]
 
 # Department options

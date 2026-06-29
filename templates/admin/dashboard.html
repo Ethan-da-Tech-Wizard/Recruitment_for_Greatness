@@ -171,7 +171,6 @@
                                     {% for status_key, status_name in status_options %}
                                         {% if status_key == candidate.status %}{{ status_name }}{% endif %}
                                     {% endfor %}
-                                    {% if candidate.status == 'new' %}New - Uncontacted{% endif %}
                                 </span>
                             </td>
                             <td class="date-cell">{{ candidate.created_at[:10] if candidate.created_at else 'Unknown' }}</td>

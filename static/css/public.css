@@ -15,7 +15,7 @@
 }
 
 .scroll-progress-bar {
-    background: linear-gradient(90deg, var(--gold), #e56b6f, var(--maroon-light));
+    background: linear-gradient(90deg, var(--gold), #7bdcb5, var(--maroon-light));
     height: 100%;
     transform: scaleX(0);
     transform-origin: left;
@@ -222,8 +222,8 @@
 }
 
 .hero-primary:hover {
-    background: #f4b63e;
-    border-color: #f4b63e;
+    background: #8ed1fc;
+    border-color: #8ed1fc;
     color: var(--maroon-dark);
 }
 
@@ -258,7 +258,7 @@
 .signal-core {
     align-items: center;
     aspect-ratio: 1;
-    border: 1px solid rgba(238, 155, 0, 0.55);
+    border: 1px solid rgba(123, 176, 231, 0.55);
     border-radius: var(--radius-full);
     display: flex;
     flex-direction: column;
@@ -270,7 +270,7 @@
 
 .signal-core::before,
 .signal-core::after {
-    border: 1px solid rgba(238, 155, 0, 0.42);
+    border: 1px solid rgba(123, 176, 231, 0.42);
     border-radius: var(--radius-full);
     content: "";
     inset: -10px;
@@ -407,8 +407,8 @@
 
 .sister-cities-section {
     background:
-        radial-gradient(circle at top left, rgba(238, 155, 0, 0.18), transparent 34rem),
-        linear-gradient(135deg, rgba(0, 95, 115, 0.96), rgba(91, 30, 54, 0.96));
+        radial-gradient(circle at top left, rgba(123, 176, 231, 0.2), transparent 34rem),
+        linear-gradient(135deg, rgba(47, 111, 115, 0.96), rgba(37, 79, 85, 0.96));
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     color: var(--white);
@@ -475,8 +475,8 @@
 }
 
 .city-card-featured {
-    background: rgba(238, 155, 0, 0.24);
-    border-color: rgba(238, 155, 0, 0.5);
+    background: rgba(123, 176, 231, 0.2);
+    border-color: rgba(123, 176, 231, 0.46);
 }
 
 .city-priority {
@@ -567,7 +567,7 @@
 }
 
 .path-card::before {
-    background: linear-gradient(90deg, var(--gold), #e56b6f, var(--maroon-light));
+    background: linear-gradient(90deg, var(--gold), #7bdcb5, var(--maroon-light));
     content: "";
     height: 4px;
     left: 0;
@@ -648,7 +648,7 @@
     width: 100%;
     height: 150px;
     background:
-        linear-gradient(135deg, rgba(0, 95, 115, 0.08), rgba(238, 155, 0, 0.18)),
+        linear-gradient(135deg, rgba(47, 111, 115, 0.08), rgba(123, 176, 231, 0.18)),
         linear-gradient(135deg, var(--gray-100), var(--gray-200));
     border-radius: var(--radius-md);
     display: flex;
@@ -746,7 +746,7 @@
 }
 
 .form-progress-bar {
-    background: linear-gradient(90deg, var(--gold), #e56b6f, var(--maroon-light));
+    background: linear-gradient(90deg, var(--gold), #7bdcb5, var(--maroon-light));
     border-radius: inherit;
     height: 100%;
     transition: width var(--transition-slow);
@@ -1151,7 +1151,7 @@
 .story-image-placeholder {
     height: 300px;
     background:
-        linear-gradient(180deg, rgba(0, 95, 115, 0.08), rgba(238, 155, 0, 0.18)),
+        linear-gradient(180deg, rgba(47, 111, 115, 0.08), rgba(123, 176, 231, 0.18)),
         url('../images/generated/better-at-shea-hero.jpg') center / cover no-repeat;
     border-radius: var(--radius-lg);
     display: flex;
@@ -1183,7 +1183,7 @@
     align-self: stretch;
     background:
         linear-gradient(135deg, rgba(237, 246, 244, 0.96), rgba(255, 255, 255, 0.96)),
-        radial-gradient(circle at 15% 20%, rgba(238, 155, 0, 0.28), transparent 28%);
+        radial-gradient(circle at 15% 20%, rgba(123, 176, 231, 0.22), transparent 28%);
     border-radius: var(--radius-lg);
     border: 1px solid rgba(0, 95, 115, 0.14);
     box-shadow: var(--shadow-md);

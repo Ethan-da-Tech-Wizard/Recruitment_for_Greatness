@@ -55,7 +55,6 @@
                         {% for status_key, status_name in status_options %}
                             {% if status_key == candidate.status %}{{ status_name }}{% endif %}
                         {% endfor %}
-                        {% if candidate.status == 'new' %}New - Uncontacted{% endif %}
                     </span>
                 </div>
                 <div class="candidate-actions">
@@ -112,7 +111,7 @@
                             <path d="M12 20h9"></path>
                             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                         </svg>
-                        Update Status
+                        Status
                     </h2>
                     <form action="{{ url_for('update_status', candidate_id=candidate.id) }}" method="POST" class="status-form">
                         <select name="status" class="status-select">
@@ -122,7 +121,7 @@
                             </option>
                             {% endfor %}
                         </select>
-                        <button type="submit" class="btn btn-primary">Update Status</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </section>
 

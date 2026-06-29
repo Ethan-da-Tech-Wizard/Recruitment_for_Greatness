@@ -1,19 +1,19 @@
 /* 
  * Shea PARC Admin Pipeline
  * Common Styles - Shared across both applications
- * Colors: Deep teal, amber, white
+ * Colors: Shea-inspired teal, aqua, soft green, white
  */
 
 /* CSS Variables */
 :root {
     /* Primary Colors */
-    --maroon: #005f73;
-    --maroon-dark: #003f4f;
-    --maroon-light: #0a9396;
+    --maroon: #2f6f73;
+    --maroon-dark: #254f55;
+    --maroon-light: #5f8789;
     
-    --gold: #ee9b00;
-    --gold-dark: #ca6702;
-    --gold-light: #edf6f4;
+    --gold: #7bb0e7;
+    --gold-dark: #4054b2;
+    --gold-light: #eef7fb;
     
     --white: #ffffff;
     --off-white: #fafafa;
@@ -32,7 +32,7 @@
     
     /* Status Colors */
     --success: #10b981;
-    --warning: #f59e0b;
+    --warning: #7bb0e7;
     --error: #ef4444;
     --info: #3b82f6;
     
@@ -185,7 +185,7 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: var(--maroon);
-    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(95, 135, 137, 0.14);
 }
 
 input::placeholder, textarea::placeholder {
