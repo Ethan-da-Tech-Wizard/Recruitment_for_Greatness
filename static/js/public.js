@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
     const revealTargets = document.querySelectorAll(
-        '.warm-intro, .identity-item, .sister-cities-section, .city-card, .shea-sayings, .shea-commentary, .path-card, .department-card, .form-container, .benefit-card, .care-network-panel, .sister-facility-note'
+        '.warm-intro, .identity-item, .sister-cities-section, .city-card, .az-map-section, .az-map-board, .map-detail, .shea-sayings, .shea-commentary, .path-card, .department-card, .form-container, .benefit-card, .care-network-panel, .sister-facility-note'
     );
     revealTargets.forEach(function(target) {
         target.classList.add('reveal-on-scroll');
@@ -70,6 +70,39 @@ document.addEventListener('DOMContentLoaded', function() {
         sections.forEach(function(item) {
             sectionObserver.observe(item.section);
         });
+    }
+
+    const mapPins = document.querySelectorAll('.map-pin');
+    const mapDetail = document.querySelector('.map-detail');
+    const mapDetailLabel = mapDetail ? mapDetail.querySelector('.map-detail-label') : null;
+    const mapDetailTitle = mapDetail ? mapDetail.querySelector('h3') : null;
+    const mapDetailCopy = mapDetail ? mapDetail.querySelector('p') : null;
+    const mapDetailNote = mapDetail ? mapDetail.querySelector('strong') : null;
+
+    function activateMapPin(pin) {
+        if (!pin || !mapDetail || !mapDetailLabel || !mapDetailTitle || !mapDetailCopy || !mapDetailNote) {
+            return;
+        }
+
+        mapPins.forEach(function(item) {
+            item.classList.toggle('active', item === pin);
+            item.setAttribute('aria-pressed', item === pin ? 'true' : 'false');
+        });
+
+        mapDetailLabel.textContent = pin.dataset.zone || 'Sister Facility Area';
+        mapDetailTitle.textContent = pin.dataset.city || 'Arizona';
+        mapDetailCopy.textContent = pin.dataset.copy || '';
+        mapDetailNote.textContent = pin.dataset.note || '';
+    }
+
+    if (mapPins.length) {
+        mapPins.forEach(function(pin) {
+            pin.setAttribute('aria-pressed', pin.classList.contains('active') ? 'true' : 'false');
+            pin.addEventListener('click', function() {
+                activateMapPin(pin);
+            });
+        });
+        activateMapPin(document.querySelector('.map-pin.active') || mapPins[0]);
     }
 
     // Phone number formatting

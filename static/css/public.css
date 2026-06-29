@@ -550,6 +550,341 @@
     margin: 0;
 }
 
+.az-map-section {
+    align-items: stretch;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 251, 0.96)),
+        linear-gradient(90deg, rgba(0, 95, 115, 0.08), transparent);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    margin-bottom: var(--spacing-2xl);
+    overflow: hidden;
+    padding: var(--spacing-xl);
+    position: relative;
+}
+
+.az-map-section::before {
+    background-image:
+        linear-gradient(rgba(0, 95, 115, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 95, 115, 0.07) 1px, transparent 1px);
+    background-size: 34px 34px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+    pointer-events: none;
+    position: absolute;
+}
+
+.map-copy {
+    align-self: center;
+    position: relative;
+    z-index: 1;
+}
+
+.map-copy h2 {
+    color: var(--maroon);
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.map-copy p {
+    color: var(--gray-700);
+    font-size: var(--font-size-lg);
+}
+
+.shea-commentary.map-note {
+    background: var(--white);
+}
+
+.az-map-shell {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.52fr);
+    min-height: 430px;
+    position: relative;
+    z-index: 1;
+}
+
+.az-map-board {
+    background:
+        radial-gradient(circle at 62% 42%, rgba(123, 176, 231, 0.24), transparent 13rem),
+        linear-gradient(145deg, rgba(37, 79, 85, 0.98), rgba(47, 111, 115, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), var(--shadow-md);
+    min-height: 430px;
+    overflow: hidden;
+    position: relative;
+}
+
+.az-map-board::before {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    content: "";
+    inset: 0;
+    opacity: 0.8;
+    pointer-events: none;
+    position: absolute;
+}
+
+.az-map-board::after {
+    background: linear-gradient(90deg, transparent, rgba(123, 176, 231, 0.2), transparent);
+    content: "";
+    height: 100%;
+    left: -30%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: skewX(-14deg);
+    width: 26%;
+    animation: mapSweep 5.5s ease-in-out infinite;
+}
+
+.az-map-shape {
+    background:
+        linear-gradient(145deg, rgba(238, 247, 251, 0.2), rgba(123, 176, 231, 0.1)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    clip-path: polygon(31% 4%, 78% 11%, 70% 92%, 23% 92%, 27% 60%, 18% 52%, 27% 43%);
+    inset: 1.2rem;
+    position: absolute;
+}
+
+.az-map-shape::before,
+.az-map-shape::after {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    content: "";
+    position: absolute;
+}
+
+.az-map-shape::before {
+    inset: 18% 18% 20% 26%;
+    transform: rotate(8deg);
+}
+
+.az-map-shape::after {
+    border-radius: var(--radius-full);
+    height: 44%;
+    left: 34%;
+    top: 30%;
+    width: 34%;
+}
+
+.map-route {
+    background: rgba(123, 176, 231, 0.72);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 18px rgba(123, 176, 231, 0.5);
+    display: block;
+    height: 3px;
+    position: absolute;
+    transform-origin: left center;
+}
+
+.route-west {
+    left: 34%;
+    top: 43%;
+    transform: rotate(-8deg);
+    width: 25%;
+}
+
+.route-east {
+    left: 50%;
+    top: 47%;
+    transform: rotate(18deg);
+    width: 20%;
+}
+
+.route-south {
+    left: 55%;
+    top: 52%;
+    transform: rotate(73deg);
+    width: 30%;
+}
+
+.map-pin {
+    --pin-x: 50%;
+    --pin-y: 50%;
+    align-items: center;
+    background: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 6px rgba(123, 176, 231, 0.16), 0 10px 22px rgba(0, 0, 0, 0.22);
+    color: var(--maroon-dark);
+    cursor: pointer;
+    display: flex;
+    height: 1.05rem;
+    justify-content: center;
+    left: var(--pin-x);
+    padding: 0;
+    position: absolute;
+    top: var(--pin-y);
+    transform: translate(-50%, -50%);
+    transition: background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    width: 1.05rem;
+    z-index: 3;
+}
+
+.map-pin::before {
+    animation: pinPulse 2.8s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: inherit;
+    content: "";
+    inset: -10px;
+    position: absolute;
+}
+
+.map-pin span {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    color: var(--maroon-dark);
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    left: 50%;
+    line-height: 1;
+    opacity: 0;
+    padding: 0.32rem 0.5rem;
+    pointer-events: none;
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    transform: translate(-50%, -0.25rem);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    white-space: nowrap;
+}
+
+.map-pin:hover,
+.map-pin:focus-visible,
+.map-pin.active {
+    background: #d9f99d;
+    box-shadow: 0 0 0 8px rgba(217, 249, 157, 0.18), 0 0 24px rgba(123, 176, 231, 0.5);
+    transform: translate(-50%, -50%) scale(1.18);
+}
+
+.map-pin:hover span,
+.map-pin:focus-visible span,
+.map-pin.active span {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.pin-scottsdale {
+    --pin-x: 63%;
+    --pin-y: 42%;
+}
+
+.pin-phoenix {
+    --pin-x: 55%;
+    --pin-y: 45%;
+}
+
+.pin-mesa {
+    --pin-x: 67%;
+    --pin-y: 50%;
+}
+
+.pin-glendale {
+    --pin-x: 48%;
+    --pin-y: 43%;
+}
+
+.pin-peoria {
+    --pin-x: 43%;
+    --pin-y: 38%;
+}
+
+.pin-surprise {
+    --pin-x: 37%;
+    --pin-y: 35%;
+}
+
+.pin-tempe {
+    --pin-x: 59%;
+    --pin-y: 49%;
+}
+
+.pin-chandler {
+    --pin-x: 62%;
+    --pin-y: 56%;
+}
+
+.pin-tucson {
+    --pin-x: 58%;
+    --pin-y: 78%;
+}
+
+.map-detail {
+    align-self: stretch;
+    background: var(--white);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    padding: var(--spacing-lg);
+}
+
+.map-detail-label {
+    color: var(--gold-dark);
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.map-detail h3 {
+    color: var(--maroon);
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.map-detail p {
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-md);
+}
+
+.map-detail strong {
+    color: var(--maroon-dark);
+    display: block;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+@keyframes mapSweep {
+    0%, 30% {
+        left: -35%;
+        opacity: 0;
+    }
+    45%, 62% {
+        opacity: 1;
+    }
+    100% {
+        left: 112%;
+        opacity: 0;
+    }
+}
+
+@keyframes pinPulse {
+    0%, 100% {
+        opacity: 0.34;
+        transform: scale(0.85);
+    }
+    50% {
+        opacity: 0.88;
+        transform: scale(1.2);
+    }
+}
+
 .shea-sayings {
     align-items: center;
     background: var(--white);
@@ -560,7 +895,7 @@
     flex-wrap: wrap;
     gap: var(--spacing-sm);
     justify-content: center;
-    margin: calc(var(--spacing-2xl) * -0.55) auto var(--spacing-2xl);
+    margin: 0 auto var(--spacing-2xl);
     max-width: 980px;
     padding: var(--spacing-md);
     position: relative;
@@ -1586,6 +1921,8 @@
     .warm-intro,
     .identity-band,
     .sister-cities-section,
+    .az-map-section,
+    .az-map-shell,
     .sister-facility-note,
     .care-network-grid,
     .path-grid,
@@ -1598,6 +1935,26 @@
 
     .city-grid {
         grid-template-columns: 1fr;
+    }
+
+    .az-map-section {
+        padding: var(--spacing-lg);
+    }
+
+    .az-map-board {
+        min-height: 360px;
+    }
+
+    .az-map-shell {
+        min-height: 0;
+    }
+
+    .map-detail {
+        min-height: auto;
+    }
+
+    .map-pin span {
+        display: none;
     }
     
     .facility-stats {
