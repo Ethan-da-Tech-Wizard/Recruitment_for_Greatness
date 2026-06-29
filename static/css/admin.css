@@ -62,6 +62,94 @@
     color: var(--white);
 }
 
+/* PIN Login */
+.admin-login-body {
+    background:
+        linear-gradient(135deg, rgba(0, 63, 79, 0.94), rgba(0, 95, 115, 0.82)),
+        var(--gold-light);
+    min-height: 100vh;
+}
+
+.pin-login {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+}
+
+.pin-card {
+    background: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    max-width: 430px;
+    padding: var(--spacing-2xl);
+    text-align: center;
+    width: 100%;
+}
+
+.pin-logo {
+    height: 72px;
+    margin: 0 auto var(--spacing-md);
+    width: 72px;
+}
+
+.pin-kicker {
+    color: var(--gold-dark);
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+}
+
+.pin-card h1 {
+    color: var(--maroon);
+    margin-bottom: var(--spacing-sm);
+}
+
+.pin-card p {
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pin-flashes {
+    margin: 0 0 var(--spacing-md);
+}
+
+.pin-form {
+    display: grid;
+    gap: var(--spacing-sm);
+    text-align: left;
+}
+
+.pin-form label {
+    color: var(--gray-700);
+    font-weight: 700;
+}
+
+.pin-form input {
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xl);
+    letter-spacing: 0;
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.pin-form input:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.12);
+    outline: none;
+}
+
+.pin-form .btn {
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+    width: 100%;
+}
+
 /* Admin Main Layout */
 .admin-main {
     display: grid;

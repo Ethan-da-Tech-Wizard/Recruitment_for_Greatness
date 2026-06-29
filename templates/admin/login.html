@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Shea PARC Recruitment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body class="admin-login-body">
+    <main class="pin-login">
+        <section class="pin-card" aria-labelledby="pin-title">
+            <div class="logo-placeholder admin-logo pin-logo">
+                <span>SHEA</span>
+            </div>
+            <span class="pin-kicker">Recruiter Access</span>
+            <h1 id="pin-title">Enter Admin PIN</h1>
+            <p>Use the Shea dashboard PIN to view candidates and follow-ups.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages pin-flashes">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}" class="pin-form">
+                <input type="hidden" name="next" value="{{ next_url }}">
+                <label for="pin">PIN</label>
+                <input id="pin" name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" autofocus required>
+                <button type="submit" class="btn btn-primary">Unlock Dashboard</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -11,7 +11,7 @@ from io import StringIO
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, Response
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, Response, session
 from shared.database import (
     get_all_candidates, get_candidate_by_id, update_candidate_status,
     update_candidate_notes, get_status_counts, delete_candidate,
@@ -23,9 +23,49 @@ app = Flask(__name__,
             template_folder='../templates/admin',
             static_folder='../static')
 app.secret_key = 'shea-parc-admin-2026'
+ADMIN_PIN = os.environ.get('ADMIN_PIN', '1234')
 
 # Ensure database exists
 init_database()
+
+
+@app.before_request
+def require_admin_pin():
+    """Require the recruiter PIN before showing admin data."""
+    open_endpoints = {'login', 'health_check', 'static'}
+    if request.endpoint in open_endpoints:
+        return None
+    if session.get('admin_authenticated'):
+        return None
+    return redirect(url_for('login', next=request.full_path if request.query_string else request.path))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """PIN login page for recruiters."""
+    next_url = request.args.get('next') or url_for('dashboard')
+    if not next_url.startswith('/'):
+        next_url = url_for('dashboard')
+    if request.method == 'POST':
+        pin = request.form.get('pin', '')
+        next_url = request.form.get('next') or url_for('dashboard')
+        if not next_url.startswith('/'):
+            next_url = url_for('dashboard')
+        if pin == ADMIN_PIN:
+            session['admin_authenticated'] = True
+            flash('Welcome back to the Shea dashboard.', 'success')
+            return redirect(next_url)
+        flash('That PIN did not match. Please try again.', 'error')
+
+    return render_template('login.html', next_url=next_url)
+
+
+@app.route('/logout')
+def logout():
+    """Log recruiters out of the admin dashboard."""
+    session.pop('admin_authenticated', None)
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('login'))
 
 
 @app.route('/')
