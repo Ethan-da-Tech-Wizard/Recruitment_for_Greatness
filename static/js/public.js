@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
     const revealTargets = document.querySelectorAll(
-        '.warm-intro, .identity-item, .sister-cities-section, .city-card, .path-card, .department-card, .form-container, .benefit-card, .care-network-panel, .sister-facility-note'
+        '.warm-intro, .identity-item, .sister-cities-section, .city-card, .shea-sayings, .path-card, .department-card, .form-container, .benefit-card, .care-network-panel, .sister-facility-note'
     );
     revealTargets.forEach(function(target) {
         target.classList.add('reveal-on-scroll');

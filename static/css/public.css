@@ -484,6 +484,39 @@
     margin: 0;
 }
 
+.shea-sayings {
+    align-items: center;
+    background: var(--white);
+    border: 1px solid rgba(0, 95, 115, 0.14);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin: calc(var(--spacing-2xl) * -0.55) auto var(--spacing-2xl);
+    max-width: 980px;
+    padding: var(--spacing-md);
+    position: relative;
+    z-index: 2;
+}
+
+.shea-sayings span {
+    background: rgba(237, 246, 244, 0.9);
+    border: 1px solid rgba(0, 95, 115, 0.12);
+    border-radius: var(--radius-full);
+    color: var(--teal-dark);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    padding: 0.55rem 0.85rem;
+    white-space: nowrap;
+}
+
+.shea-sayings span:first-child {
+    background: var(--gold);
+    color: var(--maroon-dark);
+}
+
 .role-path-section {
     margin-bottom: var(--spacing-2xl);
 }
