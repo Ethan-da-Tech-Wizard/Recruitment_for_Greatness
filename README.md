@@ -229,7 +229,7 @@ Better_at_Shea/
 
 ## About Shea Post Acute Rehabilitation Center
 
-*See the About section in the application for facility information and recruiting context.*
+*See the About section in the application for facility information and admin context.*
 
 ---
 

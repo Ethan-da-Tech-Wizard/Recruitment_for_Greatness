@@ -351,6 +351,55 @@
     font-size: var(--font-size-lg);
 }
 
+.shea-commentary {
+    background: linear-gradient(135deg, rgba(238, 247, 251, 0.96), rgba(255, 255, 255, 0.96));
+    border: 1px solid rgba(95, 135, 137, 0.22);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    text-align: left;
+}
+
+.shea-commentary span {
+    color: var(--maroon-dark);
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: 900;
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+}
+
+.shea-commentary p {
+    color: var(--gray-700);
+    font-size: var(--font-size-base);
+    line-height: 1.55;
+    margin: 0;
+}
+
+.shea-commentary.compact {
+    margin-top: 0;
+}
+
+.shea-commentary.center-note {
+    margin: var(--spacing-md) auto var(--spacing-xl);
+    max-width: 680px;
+}
+
+.shea-commentary.form-note-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.28);
+    border-left-color: var(--gold);
+    box-shadow: none;
+    margin-top: var(--spacing-md);
+}
+
+.shea-commentary.form-note-card span,
+.shea-commentary.form-note-card p {
+    color: var(--white);
+}
+
 .intro-notes {
     display: grid;
     gap: var(--spacing-md);
@@ -593,6 +642,13 @@
 .path-card p {
     color: var(--gray-600);
     margin: 0;
+}
+
+.commentary-row {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: var(--spacing-lg);
 }
 
 /* Main Content */
@@ -1533,6 +1589,7 @@
     .sister-facility-note,
     .care-network-grid,
     .path-grid,
+    .commentary-row,
     .form-header,
     .story-content,
     .building-overview {
