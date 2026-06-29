@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login | Shea PARC Recruitment</title>
+    <title>Candidate Database PIN | Shea PARC Recruitment</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
@@ -13,9 +13,9 @@
             <div class="logo-placeholder admin-logo pin-logo">
                 <span>SHEA</span>
             </div>
-            <span class="pin-kicker">Recruiter Access</span>
-            <h1 id="pin-title">Enter Admin PIN</h1>
-            <p>Use the Shea dashboard PIN to view candidates and follow-ups.</p>
+            <span class="pin-kicker">Recruiter Database</span>
+            <h1 id="pin-title">Enter Database PIN</h1>
+            <p>Use the Shea database PIN to view candidate forms, follow-ups, notes, and status updates.</p>
 
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -31,7 +31,7 @@
                 <input type="hidden" name="next" value="{{ next_url }}">
                 <label for="pin">PIN</label>
                 <input id="pin" name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" autofocus required>
-                <button type="submit" class="btn btn-primary">Unlock Dashboard</button>
+                <button type="submit" class="btn btn-primary">Open Candidate Database</button>
             </form>
         </section>
     </main>

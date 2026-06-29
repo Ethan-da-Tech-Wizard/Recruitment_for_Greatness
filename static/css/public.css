@@ -131,6 +131,23 @@
     background-color: var(--gold-light);
 }
 
+.nav-database {
+    border: 1px solid rgba(0, 95, 115, 0.18);
+    color: var(--maroon-dark);
+    font-weight: 800;
+}
+
+.nav-database::before {
+    background: var(--gold);
+    border-radius: var(--radius-full);
+    color: var(--maroon-dark);
+    content: "PIN";
+    font-size: 0.66rem;
+    font-weight: 900;
+    margin-right: 0.45rem;
+    padding: 0.12rem 0.35rem;
+}
+
 /* Hero Section */
 .hero {
     min-height: 440px;

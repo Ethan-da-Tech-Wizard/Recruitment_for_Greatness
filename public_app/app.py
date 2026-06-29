@@ -18,6 +18,7 @@ app = Flask(__name__,
             template_folder='../templates/public',
             static_folder='../static')
 app.secret_key = 'shea-parc-recruitment-2026'
+ADMIN_DATABASE_URL = os.environ.get('ADMIN_DATABASE_URL', 'http://localhost:5001').rstrip('/')
 
 # Ensure database exists
 init_database()
@@ -77,6 +78,12 @@ def success():
 def about():
     """About Shea PARC page."""
     return render_template('about.html')
+
+
+@app.route('/database')
+def database_entry():
+    """Send recruiters to the PIN-protected candidate database."""
+    return redirect(f'{ADMIN_DATABASE_URL}/login?next=/')
 
 
 @app.route('/api/health')
