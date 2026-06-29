@@ -603,7 +603,7 @@
 .az-map-shell {
     display: grid;
     gap: var(--spacing-md);
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.52fr);
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.62fr);
     min-height: 430px;
     position: relative;
     z-index: 1;
@@ -711,14 +711,14 @@
     --pin-x: 50%;
     --pin-y: 50%;
     align-items: center;
-    background: var(--white);
-    border: 2px solid rgba(255, 255, 255, 0.72);
+    background: transparent;
+    border: 0;
     border-radius: var(--radius-full);
-    box-shadow: 0 0 0 6px rgba(123, 176, 231, 0.16), 0 10px 22px rgba(0, 0, 0, 0.22);
+    box-shadow: none;
     color: var(--maroon-dark);
     cursor: pointer;
     display: flex;
-    height: 1.05rem;
+    height: 2.2rem;
     justify-content: center;
     left: var(--pin-x);
     padding: 0;
@@ -726,7 +726,7 @@
     top: var(--pin-y);
     transform: translate(-50%, -50%);
     transition: background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
-    width: 1.05rem;
+    width: 2.2rem;
     z-index: 3;
 }
 
@@ -737,6 +737,17 @@
     content: "";
     inset: -10px;
     position: absolute;
+}
+
+.map-pin::after {
+    background: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    border-radius: inherit;
+    box-shadow: 0 0 0 6px rgba(123, 176, 231, 0.16), 0 10px 22px rgba(0, 0, 0, 0.22);
+    content: "";
+    height: 1.05rem;
+    position: absolute;
+    width: 1.05rem;
 }
 
 .map-pin span {
@@ -759,12 +770,28 @@
     white-space: nowrap;
 }
 
+.map-pin span em {
+    background: var(--gold-light);
+    border-radius: var(--radius-full);
+    color: var(--maroon);
+    display: inline-block;
+    font-style: normal;
+    margin-left: 0.25rem;
+    min-width: 1.15rem;
+    padding: 0.12rem 0.28rem;
+}
+
 .map-pin:hover,
 .map-pin:focus-visible,
 .map-pin.active {
+    transform: translate(-50%, -50%) scale(1.18);
+}
+
+.map-pin:hover::after,
+.map-pin:focus-visible::after,
+.map-pin.active::after {
     background: #d9f99d;
     box-shadow: 0 0 0 8px rgba(217, 249, 157, 0.18), 0 0 24px rgba(123, 176, 231, 0.5);
-    transform: translate(-50%, -50%) scale(1.18);
 }
 
 .map-pin:hover span,
@@ -776,47 +803,77 @@
 
 .pin-scottsdale {
     --pin-x: 63%;
-    --pin-y: 42%;
+    --pin-y: 40%;
 }
 
 .pin-phoenix {
     --pin-x: 55%;
-    --pin-y: 45%;
+    --pin-y: 47%;
 }
 
 .pin-mesa {
-    --pin-x: 67%;
-    --pin-y: 50%;
+    --pin-x: 71%;
+    --pin-y: 48%;
 }
 
 .pin-glendale {
     --pin-x: 48%;
-    --pin-y: 43%;
+    --pin-y: 44%;
 }
 
 .pin-peoria {
     --pin-x: 43%;
-    --pin-y: 38%;
+    --pin-y: 39%;
 }
 
 .pin-surprise {
-    --pin-x: 37%;
-    --pin-y: 35%;
+    --pin-x: 36%;
+    --pin-y: 34%;
 }
 
 .pin-tempe {
-    --pin-x: 59%;
-    --pin-y: 49%;
+    --pin-x: 56%;
+    --pin-y: 52%;
 }
 
 .pin-chandler {
-    --pin-x: 62%;
-    --pin-y: 56%;
+    --pin-x: 64%;
+    --pin-y: 58%;
 }
 
 .pin-tucson {
     --pin-x: 58%;
     --pin-y: 78%;
+}
+
+.pin-youngtown {
+    --pin-x: 41%;
+    --pin-y: 36%;
+}
+
+.pin-sun-city-west {
+    --pin-x: 33%;
+    --pin-y: 31%;
+}
+
+.pin-gilbert {
+    --pin-x: 72%;
+    --pin-y: 62%;
+}
+
+.pin-avondale {
+    --pin-x: 45%;
+    --pin-y: 48%;
+}
+
+.pin-fountain-hills {
+    --pin-x: 74%;
+    --pin-y: 38%;
+}
+
+.pin-prescott {
+    --pin-x: 38%;
+    --pin-y: 18%;
 }
 
 .map-detail {
@@ -827,7 +884,7 @@
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100%;
     padding: var(--spacing-lg);
 }
@@ -851,6 +908,39 @@
 .map-detail p {
     color: var(--gray-700);
     margin-bottom: var(--spacing-md);
+}
+
+.map-location-list {
+    display: grid;
+    gap: var(--spacing-xs);
+    list-style: none;
+    margin: 0 0 var(--spacing-md);
+    max-height: 230px;
+    overflow: auto;
+    padding: 0;
+}
+
+.map-location-list li {
+    background: var(--gold-light);
+    border: 1px solid rgba(0, 95, 115, 0.1);
+    border-radius: var(--radius-md);
+    padding: 0.55rem 0.65rem;
+}
+
+.map-location-list span {
+    color: var(--maroon-dark);
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+.map-location-list small {
+    color: var(--gray-600);
+    display: block;
+    font-size: var(--font-size-xs);
+    line-height: 1.35;
+    margin-top: 0.18rem;
 }
 
 .map-detail strong {
